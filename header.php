@@ -111,7 +111,7 @@ data-background="assets/images/boxed_background/1.jpg"
 
 					<!-- Logo -->
 					<a class="logo pull-left" href="<?=site_url()?>">
-						<img src="<?=get_stylesheet_directory_uri();?>/assets/img/mmc-logo-light.png" alt="" />
+						<img src="<?=get_stylesheet_directory_uri();?>/assets/img/header-logo-light.png" alt="" />
 					</a>
 
 					<!--

@@ -6,7 +6,7 @@
 			<div class="container padding-20 margin-bottom-10">
 				<div class="text-center">
 					<a href="<?=site_url()?>" class="text-white underline">
-						<img src="<?=get_stylesheet_directory_uri();?>/assets/img/mmc-logo-light.png" class="width-150">
+						<img src="<?=get_stylesheet_directory_uri();?>/assets/img/footer-logo.png" class="width-150">
 					</a>
 					<!-- Social Icons -->
 					<div class="text-center margin-top-0">

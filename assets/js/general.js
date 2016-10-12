@@ -27,3 +27,7 @@ function xyrLoadImg() {
             }
         } );
 }
+
+jQuery( function ( $ ) {
+
+});
