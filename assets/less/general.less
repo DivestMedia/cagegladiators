@@ -228,6 +228,9 @@ section#featured-fighter{
 
     >div.container{
     	.fighter-details{
+    		vertical-align: bottom;
+		    display: inline-block;
+		    float: none;
     		button{
     			background-color: #ce0505;
 				border-radius: 0;
@@ -237,9 +240,10 @@ section#featured-fighter{
     				font-weight: 900;
     				line-height: 1 !important;
     				font-family: "proximanova";
+    				margin-bottom: 0;
     			}
     		}
-    		img{
+    		img.fighter-image{
     			width: 50%;
     			height: auto;
     			position: absolute;
@@ -252,6 +256,68 @@ section#featured-fighter{
 	    transform: skew(0deg,-4deg);
 	    -ms-transform:skew(0deg,-8deg);
 		-webkit-transform:skew(0deg,-4deg); 
+	}
+}
+section#main-featured-fighter{
+    height: 100%;
+    position: relative;
+    z-index: 1;
+    background-color: #b9b8b8;
+    margin-bottom: -83px;
+    margin-top: 19px;
+    padding: 185px 0 25px 0;
+    overflow: hidden;
+    border-bottom: 15px solid #212121;
+	// transform: skew(0deg,4deg);
+	// -ms-transform:skew(0deg,8deg);
+	// -webkit-transform:skew(0deg,4deg); 
+	// background-size:cover;
+	// .bg-red{
+	// 	background-color: #ce0505;
+	// }
+	.ff-bg-red{
+		background-color: #ce0505;
+	    position: absolute;
+	    height: 200px;
+	    width: 100%;
+	    transform: skew(0deg,4deg);
+        -ms-transform:skew(0deg,8deg);
+	    -webkit-transform:skew(0deg,4deg); 
+	    top: -80px;
+	    z-index: -1;
+	}
+	.ff-bg-gray{
+	    >div.container{
+	    	.fighter-details{
+	    		vertical-align: bottom;
+			    display: inline-block;
+			    float: none;
+	    		button{
+	    			background-color: #ce0505;
+					border-radius: 0;
+	    		}
+	    		.fighter-name{
+	    			h1{
+	    				font-weight: 900;
+	    				line-height: 1 !important;
+	    				font-family: "proximanova";
+	    				margin-bottom: 0;
+	    			}
+	    		}
+	    		img.fighter-image{
+	    			width: 80%;
+	    			height: auto;
+	    			position: absolute;
+				    bottom: -110px;
+	    			left: 10px;
+				    z-index: -1;
+				}
+	    	}
+	  //   	background-size:cover;
+		 //    transform: skew(0deg,-4deg);
+		 //    -ms-transform:skew(0deg,-8deg);
+			// -webkit-transform:skew(0deg,-4deg); 
+		}
 	}
 }
 footer#footer{
