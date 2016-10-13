@@ -407,3 +407,58 @@ section#vip-subscriber{
         }
     }
 }
+#main-featured-fighter{
+    padding: 0!important;
+
+    .owl-carousel{
+        margin-bottom: 0;
+    }
+    .figher-item{
+        background-position: bottom center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        .fighter-profile{
+            position: absolute;
+            text-align: right;
+        }
+    }
+
+
+    @media screen and (min-width: 768px){
+        .ff-bg-red{
+            top: -30px;
+        }
+        .figher-item{
+            .fighter-profile{
+                width: 360px;
+                bottom: 35px;
+            }
+        }
+    }
+
+
+    @media screen and (min-width: 992px){
+        .ff-bg-red{
+            top: -30px;
+        }
+        .figher-item{
+            .fighter-profile{
+                width: 300px;
+                bottom: 35px;
+            }
+        }
+    }
+
+    @media screen and (min-width: 1200px){
+        .ff-bg-red{
+            top: -40px;
+        }
+        .figher-item{
+            .fighter-profile{
+                width: 360px;
+                bottom: 47px;
+            }
+        }
+    }
+
+}
