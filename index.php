@@ -8,11 +8,10 @@
 		<div class="container ">
 			<?php
 				get_template_part( 'partials/content', 'featured-gym' );
-			?>	
+			?>
 			<div class="row padding-10">
 				<div class="col-sm-3 col-md-2 margin-bottom-20 main-section-container hidden-xs">
-					<img src="/wp-content/themes/cagegladiators/assets/img/ads-1.png" alt="" style="width: 100%;height: auto;margin-bottom: 15px;">
-					<img src="/wp-content/themes/cagegladiators/assets/img/ads-2.png" alt="" style="width: 100%;height: auto;margin-bottom: 15px;">
+					<?php dynamic_sidebar('ads-home-left')?>
 				</div>
 				<div id="container-featured-news" class="col-sm-9 col-md-6 margin-bottom-20 main-section-container">
 

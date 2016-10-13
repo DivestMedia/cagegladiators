@@ -74,6 +74,15 @@ function backstage_smarty_widgets_init() {
         'before_title'  => '',
         'after_title'   => '',
     ));
+    register_sidebar( array(
+            'name' => 'Ads - Home Left',
+            'id' => 'ads-home-left',
+            'description' => __( 'Widgets in this area will be shown on Home Page - Left Side.', XYR_SMARTY ),
+            'before_widget' => '<div id="%1$s">',
+            'after_widget'  => '</div>',
+            'before_title'  => '',
+            'after_title'   => '',
+        ));
 }
 
 
