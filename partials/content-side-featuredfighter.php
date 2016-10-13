@@ -20,7 +20,7 @@ $featuredFighter = get_posts([
 	<?php if(count($featuredFighter)): ?>
 		<?php foreach ($featuredFighter as $key => $fighter):
 			$imagesrc = '';
-			$sideview = get_post_meta('_uf_image_right') ?: false;
+			$sideview = get_post_meta($fighter->ID,'_uf_image_right',true) ?: false;
 			if($sideview){
 				$imagesrc = wp_get_attachment_image_src($sideview,'full');
 			}
@@ -35,8 +35,8 @@ $featuredFighter = get_posts([
 					<div class="uppercase section-title text-white text-center weight-700 size-12">Featured Fighter</div>
 					<h3 class="side-featuredfighter-title text-white uppercase size-17"><?=$fighter->post_title?></h3>
 				</div>
-				<figure>
-					<img class="img-responsive <?=($sideview ? 'sideview' : 'defaultimage')?>" src="<?=$imagesrc[0]?>" alt="" />
+				<figure style="background-image: url('<?=$imagesrc[0]?>')" class="<?=($sideview ? 'sideview' : 'defaultimage')?>">
+					<!-- <img class="img-responsive <?=($sideview ? 'sideview' : 'thumbnail')?>" src="<?=$imagesrc[0]?>" alt="" /> -->
 				</figure>
 			</div>
 		<?php endforeach; ?>
