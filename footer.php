@@ -3,7 +3,7 @@
 		?>
 		<!-- FOOTER -->
 		<footer id="footer">
-			<div class="container padding-20 margin-bottom-10">
+			<div class="container padding-20 margin-bottom-0">
 				<div class="text-center">
 					<a href="<?=site_url()?>" class="text-white underline">
 						<img src="<?=get_stylesheet_directory_uri();?>/assets/img/footer-logo.png" class="width-150">
