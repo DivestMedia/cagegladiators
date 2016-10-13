@@ -66,9 +66,11 @@ get_template_part( 'partials/content', 'main-featuredfighter' );
 							if(!empty($results[0])):
 								$RSSFIRUL = new RSSFIRUL();
 								$res = $RSSFIRUL->getFeedItemsByUrl($league['rsstitle'],1,1,[
-									(object)['id'=>$results[0]->id,'url'=>$results[0]->url,'title'=>$results[0]->title]
-									])[0];
-
+									(object)['id'=>$results[0]->id,'url'=>$results[0]->url,'title'=>$results[0]->title,'name'=>$results[0]->name]
+									]);
+								if(!empty($res[0])){
+											$res = $res[0];
+										}
 									?>
 									<div class="latest-news-container margin-bottom-10" data-news-id="<?=$res['post-id']?>" style="background-image: url('<?=$res['post-thumbnail']?>')">
 										<!-- <img src="<?=$res['post-thumbnail']?>" alt="" style="width: 100%;height: auto;"> -->
@@ -85,9 +87,11 @@ get_template_part( 'partials/content', 'main-featuredfighter' );
 										<?php
 										$RSSFIRUL = new RSSFIRUL();
 										$res = $RSSFIRUL->getFeedItemsByUrl($league['rsstitle'],1,1,[
-											(object)['id'=>$results[$i]->id,'url'=>$results[$i]->url,'title'=>$results[$i]->title]
-											])[0];
-
+											(object)['id'=>$results[$i]->id,'url'=>$results[$i]->url,'title'=>$results[$i]->title,'name'=>$results[$i]->name]
+											]);
+										if(!empty($res[0])){
+											$res = $res[0];
+										}
 											?>
 											<div class="col-sm-4">
 												<figure class="box-shadow-8" data-id="<?=$res['post-id']?>" style="background-image: url('<?=$res['post-thumbnail']?>')">
