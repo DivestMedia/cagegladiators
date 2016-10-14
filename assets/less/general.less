@@ -386,6 +386,51 @@ section#main-featured-fighter{
             }
         }
     }
+    .fighter-solo{
+        .fighter-profile-motto{
+            background: #000;
+            padding: 15px;
+            position: absolute;
+top: 188px;
+left: -310px;
+width: 300px;
+            &::before{
+                content: open-quote;
+            }
+            &::after{
+                content: close-quote;
+            }
+        }
+
+        .fighter-details{
+            .fighter-name{
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                .name-line-1{
+                    font-size: 80px;
+                    color: #fff;
+                    font-weight: bold;
+                    line-height: 100px;
+                }
+                .name-line-2{
+                    font-size: 120px;
+                    font-weight: bold;
+                    color: red;
+                    line-height: 100px;
+                }
+            }
+            figure{
+                background-repeat: no-repeat;
+                height: 378px;
+                background-position: top center;
+                background-size: 50%;
+                width: 455px;
+                float: right;
+            }
+        }
+    }
+
 }
 footer#footer{
     background: #000000;
