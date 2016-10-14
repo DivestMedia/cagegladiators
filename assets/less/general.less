@@ -409,7 +409,7 @@ section#vip-subscriber{
 }
 #main-featured-fighter{
     padding: 0!important;
-
+    margin: 0!important;
     .owl-carousel{
         margin-bottom: 0;
     }
@@ -424,30 +424,7 @@ section#vip-subscriber{
     }
 
 
-    @media screen and (min-width: 768px){
-        .ff-bg-red{
-            top: -30px;
-        }
-        .figher-item{
-            .fighter-profile{
-                width: 360px;
-                bottom: 35px;
-            }
-        }
-    }
 
-
-    @media screen and (min-width: 992px){
-        .ff-bg-red{
-            top: -30px;
-        }
-        .figher-item{
-            .fighter-profile{
-                width: 300px;
-                bottom: 35px;
-            }
-        }
-    }
 
     @media screen and (min-width: 1200px){
         .ff-bg-red{
@@ -455,10 +432,96 @@ section#vip-subscriber{
         }
         .figher-item{
             .fighter-profile{
-                width: 360px;
-                bottom: 47px;
+                width: 275px;
+                bottom: 68px;
             }
         }
     }
 
+
+    @media screen and (max-width: 1199px) and (min-width: 992px){
+        .ff-bg-red{
+            top: -30px;
+        }
+        .figher-item{
+            .fighter-profile{
+                width: 225px;
+                bottom: 35px;
+            }
+        }
+    }
+
+    @media screen and (max-width: 991px) and (min-width: 768px){
+        .ff-bg-red{
+            top: -30px;
+        }
+        .figher-item{
+            .fighter-profile{
+                width: 170px;
+                bottom: 46px;
+                p{
+                    height: 67px;
+                    margin-bottom: 10px;
+                    overflow: hidden;
+                }
+            }
+        }
+    }
+
+
+    @media screen and (max-width: 767px){
+        .ff-bg-red{
+            top: -30px;
+        }
+        .figher-item{
+
+            .fighter-profile{
+                width: 100%;
+                bottom: 0;
+                background: rgba(0,0,0,0.2);
+                padding: 10px;
+                p{
+                    margin-bottom: 10px;
+                    overflow: hidden;
+                    width: 80%;
+                    float: left;
+                    height: 36px;
+                }
+            }
+        }
+    }
+
+
+}
+#container-invest-divest{
+    background-color: #fff;
+    padding: 10px 0 0;
+    .section-title{
+        width: 50%;
+        min-width: 220px;
+        padding: 3px 0;
+        background-color: #ce0505;
+        margin:0 0 10px 10px;
+    }
+}
+
+
+.featured-side-article-item{
+    background: #1d1d1d;
+    color: #fff;
+    p{
+        padding: 10px;
+    }
+}
+
+
+.btn-red{
+    border: 1px solid #ce0505;
+    background: #ce0505;
+    color: #fff;
+    &:hover{
+        border: 1px solid #9c0000;
+        background: #9c0000;
+        color: #fff;
+    }
 }
