@@ -61,10 +61,11 @@ $featuredFighter = get_posts([
 						<img class="img-responsive" src="<?=$imagesrc[0]?>" alt="">
 				</figure>
 				<p class="nomargin">
-					<?=trim_text($fatAss2BadAss->post_content,50)?>
+					<?=trim_text($fatAss2BadAss->post_content,150)?>
 					<br>
-					<a href="<?=get_the_permalink($fatAss2BadAss->ID)?>" class="btn btn-red noradius uppercase margin-top-10">
-						<span>Click Here</span>
+					<!-- <a href="<?=get_the_permalink($fatAss2BadAss->ID)?>" class="btn btn-red noradius uppercase margin-top-10" disabled> -->
+					<a href="#" class="btn btn-red noradius uppercase margin-top-10 disabled">
+						<span>Coming Soon</span>
 					</a>
 				</p>
 			</div>
