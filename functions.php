@@ -1,5 +1,9 @@
 <?php
 
+include_once( get_stylesheet_directory() .'/includes/custom-redirect.php');
+
+New CustomRedirect();
+
 add_filter( 'jpeg_quality', create_function( '', 'return 80;' ) );
 
 function backstage_smarty_setup() {
@@ -125,7 +129,6 @@ function posts_pagination($_limit=false) {
         echo '</ul>';
     }
 }
-
 
 function pre_get_vid_post_type($query) {
 

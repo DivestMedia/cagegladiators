@@ -6,6 +6,74 @@
 .font-proximanova{
     font-family: "proximanova", Helvetica, Arial, sans-serif!important;
 }
+
+section#section-fighters{
+    .container-fighters{
+        padding-bottom:30px;
+        .thumbnail{
+            border-bottom: 5px solid #333333;
+            background: #bbb;
+            &:hover{
+                border-bottom: 5px solid #e60f0f;
+            }
+        }
+        .lbl-weightclass{
+            color: #e60f0f;
+        }
+        a{
+            h4{
+                margin-top: 5px;
+            }
+        }
+        .fighter-details{
+            padding: 0 5px;
+        }
+    }
+    ul.pagination{
+        li{
+            span.current{
+                color: #fff;
+                background-color: #e60f0f;
+                border-color: #e60f0f;
+            }
+        }
+    }
+    .side-nav{
+        li.active{
+            a{
+                color:#e60f0f!important;
+            }
+        }
+    }
+}
+
+ul.nav-tabs {
+    li {
+        font-size:12px;
+        transition: all 0.2s linear;
+        &:hover {
+            background-color:transparent!important;
+            font-size:12px;
+            padding-left: 20px;
+        }
+    }
+    li.list-group-item.active {
+        background-color:transparent!important;
+        font-size:12px;
+        padding-left: 20px;
+        a {
+            background-color:transparent!important;
+            color:#e60f0f!important;
+        }
+    }
+    li.list-group-item {
+        a {
+            color:#333333!important;
+            padding-top:6px;
+        }
+    }
+}
+
 header#topNav{
     border-top: 2px solid #dd2424;
     background-color: #333;
@@ -94,6 +162,43 @@ section#home-main-container{
                     padding: 10px;
                     margin-bottom: 5px;
                     background-color: #fff;
+                    .row{
+                        padding:0 15px;
+                        .f-event{
+                            min-height: 175px;
+                            padding: 40px 15px 15px;
+                            background-color: #ce0505;
+                            color: #e7e7e7;
+                            margin-bottom: 0;
+                            label{
+                                margin: 0 0 -10px 25px;
+                            }
+                            h1{
+                                color: #e7e7e7;
+                            }
+                            button{
+                                padding: 5px 10px;
+                                border: 1px solid #fff;
+                                background-color: #ce0505;
+                            }
+                        }
+                        .f-news-content{
+                            min-height: 175px;
+                            padding: 40px 15px 15px;
+                            background-color: #555454;
+                            color: #e7e7e7;
+                            margin-bottom: 0;
+                            a{
+                                color:#9b9b9b;
+                            }
+                        }
+                        .f-news-thumb{
+                            min-height: 175px;
+                            background-size: cover;
+                            background-position: center;
+                            background-repeat: no-repeat;
+                        }
+                    }
                 }
                 .other-news-row{
                     padding: 10px;
@@ -565,12 +670,18 @@ section#vip-subscriber{
         background-color: #ce0505;
         margin:0 0 10px 10px;
     }
+    .invest-or-divest-content{
+       background-color: #1d1d1d;
+       padding: 10px;
+       color: #fff;
+    }
 }
 
 
 .featured-side-article-item{
     background: #1d1d1d;
     color: #fff;
+    border-bottom: none;
     p{
         padding: 10px;
     }
@@ -590,7 +701,8 @@ section#vip-subscriber{
 
 #content{
     &.content-single-fighter{
-        border-top: 250px solid #b9b8b8;
+        border-top: 325px solid #b9b8b8;
+        margin-top: -75px;
         background: #333333;
 
         transform: skew(0deg,4deg);

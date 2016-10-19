@@ -33,7 +33,7 @@ $featuredFighter = get_posts([
 			<div class="content-side-featuredfighter col-md-12 col-sm-6">
 				<div>
 					<div class="uppercase section-title text-white text-center weight-700 size-12">Featured Fighter</div>
-					<h3 class="side-featuredfighter-title text-white uppercase size-17"><?=$fighter->post_title?></h3>
+					<a href="<?=get_the_permalink($fighter->ID)?>"><h3 class="side-featuredfighter-title text-white uppercase size-17"><?=$fighter->post_title?></h3></a>
 				</div>
 				<figure style="background-image: url('<?=$imagesrc[0]?>')" class="<?=($sideview ? 'sideview' : 'defaultimage')?>">
 					<!-- <img class="img-responsive <?=($sideview ? 'sideview' : 'thumbnail')?>" src="<?=$imagesrc[0]?>" alt="" /> -->
@@ -64,7 +64,7 @@ $featuredFighter = get_posts([
 					<?=trim_text($fatAss2BadAss->post_content,150)?>
 					<br>
 					<!-- <a href="<?=get_the_permalink($fatAss2BadAss->ID)?>" class="btn btn-red noradius uppercase margin-top-10" disabled> -->
-					<a href="#" class="btn btn-red noradius uppercase margin-top-10 disabled">
+					<a href="#" class="btn btn-red noradius uppercase margin-top-10">
 						<span>Coming Soon</span>
 					</a>
 				</p>
@@ -106,6 +106,17 @@ $featuredFighter = get_posts([
 							</span>
 							<img src="http://i3.ytimg.com/vi/<?=$vid_id?>/maxresdefault.jpg" alt="..." class="img-responsive">
 						</a>
+					</div>
+					<div class="invest-or-divest-content">
+						<p class="nomargin">
+							Our very own unique Divest Media Invest or Divest – User-Based Reviews of all things MMA, from gyms and training camps to training techniques, clothing apparel and supplements.
+
+							<br>
+							<!-- <a href="<?=get_the_permalink($fatAss2BadAss->ID)?>" class="btn btn-red noradius uppercase margin-top-10" disabled> -->
+							<a href="#" class="btn btn-red noradius uppercase margin-top-10">
+								<span>Coming Soon</span>
+							</a>
+						</p>
 					</div>
 				</div>
 			</div>

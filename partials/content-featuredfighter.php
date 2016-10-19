@@ -2,8 +2,9 @@
 	<div class="container padding-bottom-20">
 		<div class="row">
 			<div class="col-sm-3 text-right fighter-details margin-bottom-20">
-				<p class="text-white size-13">Fabulas definitiones ei pri per recteque hendrerit scriptorem in errem scribentur mel fastidii propriae philosophia cu mea. Utinam ipsum everti necessitatibus at fuisset splendide.</p>
-				<button class="btn btn-danger btn-sm uppercase">Read More</button>
+				<p class="text-white size-13">Follow the trials and tribulations of our very own Divest Media Cage Gladiators, Filipino street warriors who we follow on the Road To Glory.
+</p>
+				<button class="btn btn-red btn-sm uppercase">Coming Soon</button>
 			</div><div class="col-sm-9 fighter-details">
 				<div>
 				</div>
