@@ -24,6 +24,14 @@
             '_uf_rank',
             '_uf_birthday',
             '_uf_association',
+            '_uf_wintko',
+            '_uf_winsubmissions',
+            '_uf_windecisions',
+            '_uf_windq',
+            '_uf_losstko',
+            '_uf_losssubmissions',
+            '_uf_lossdecisions',
+            '_uf_lossdq',
         ],
         'fighter_images' => [
             '_uf_image',
@@ -53,7 +61,9 @@
         <div class="container">
             <div class="row fighter-solo">
                 <div class="col-sm-3 text-right fighter-details margin-bottom-20">
+                    <?php if(!empty($post->post_excerpt)){?>
                     <p class="text-white size-18 fighter-profile-motto font-proximanova"><?=$post->post_excerpt?></p>
+                    <?php }?>
                 </div>
                 <div class="col-sm-9 fighter-details">
                     <div>
@@ -73,9 +83,9 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-3">
-                <div class="fighter-details-block profile-nav">
-                    <ul class="nav nav-pills  nav-stacked">
-                        <li class="active"><a href="sec-profile">Profile</a></li>
+                <div id="list-fighter-nav" class="fighter-details-block profile-nav">
+                    <ul class="nav nav-pills nav-stacked" role="tablist">
+                        <li class="active"><a href="#sec-profile">Profile</a></li>
                         <li><a href="#sec-mediagallery">Media Gallery</a></li>
                         <li><a href="#sec-fight-footage">Fight Footage</a></li>
                         <li><a href="#sec-road-to-glory">Road to Glory</a></li>
@@ -84,7 +94,7 @@
                 </div>
             </div>
             <div class="col-sm-9">
-                <div class="fighter-details-block fighter-stats row">
+                <div id="sec-profile" class="fighter-details-block fighter-stats row">
                     <!-- H3 -->
                     <div class="heading-title heading-border-bottom margin-bottom-30">
                         <div class="share-fighter pull-right">
@@ -119,34 +129,34 @@
                                     <tbody>
                                         <tr>
                                             <td>
-                                                <strong>7</strong>TKO/KO
+                                                <strong><?=$fighter_details['_uf_wintko']?:0?></strong>TKO/KO
                                             </td>
                                             <td>
-                                                <strong>0</strong>TKO/KO
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <strong>3</strong>SUBMISSIONS
-                                            </td>
-                                            <td>
-                                                <strong>0</strong>SUBMISSIONS
+                                                <strong><?=$fighter_details['_uf_losstko']?:0?></strong>TKO/KO
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <strong>3</strong>DECISION
+                                                <strong><?=$fighter_details['_uf_winsubmissions']?:0?></strong>SUBMISSIONS
                                             </td>
                                             <td>
-                                                <strong>0</strong>DECISION
+                                                <strong><?=$fighter_details['_uf_losssubmissions']?:0?></strong>SUBMISSIONS
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <strong>3</strong>DQ
+                                                <strong><?=$fighter_details['_uf_windecisions']?:0?></strong>DECISION
                                             </td>
                                             <td>
-                                                <strong>0</strong>DQ
+                                                <strong><?=$fighter_details['_uf_lossdecisions']?:0?></strong>DECISION
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong><?=$fighter_details['_uf_windq']?:0?></strong>DQ
+                                            </td>
+                                            <td>
+                                                <strong><?=$fighter_details['_uf_lossdq']?:0?></strong>DQ
                                             </td>
                                         </tr>
                                         <tr>
@@ -170,7 +180,7 @@
                                 </div>
                                 <div class="col-sm-4 fighter-info">
                                     <label>BORN</label>
-                                    <strong><?=date('m/d/Y',strtotime($fighter_details['_uf_birthday']))?></strong>
+                                    <strong><?=!empty($fighter_details['_uf_birthday'])?date('m/d/Y',strtotime($fighter_details['_uf_birthday'])):'NA'?></strong>
                                 </div>
                             </div>
                             <div class="row">
@@ -188,30 +198,38 @@
                         </div>
                     </div>
                 </div>
-                <div class="fighter-details-block fighter-gallery row">
+                <div id="sec-mediagallery" class="fighter-details-block fighter-gallery row">
                     <div class="col-md-12">
                         <h3 class="header-red">Media Gallery</h3>
-                        <div class="masonry-gallery columns-3 margin-bottom-20 clearfix lightbox" data-img-big="4" data-plugin-options='{"delegate": "a", "gallery": {"enabled": true}}'>
+                        <?php if(!empty($media_gallery)){?>
+                        <div class="masonry-gallery columns-3 margin-bottom-20 clearfix lightbox" data-img-big="8" data-plugin-options='{"delegate": "a", "gallery": {"enabled": true}}'>
                             <?php
                                 foreach ($media_gallery as $key => $img) {
-                                    if($key<7){
+                                    $ishidden = false;
+                                    if($key>=7){
+                                        $ishidden = true;
+                                    }
                             ?>
-                                    <a class="image-hover" href="<?=wp_get_attachment_image_src($img,'medium')[0]?>">
+                                    <a class="image-hover media-item <?=$ishidden===true?'hidden':''?>" href="<?=wp_get_attachment_image_src($img,'medium')[0]?>" >
                                         <img src="<?=wp_get_attachment_image_src($img,'medium')[0]?>" alt="...">
                                     </a>
                             <?php
-                                    }
                                 }
                             ?>
                         </div>
                         <a href="<?php global $wp; echo home_url(add_query_arg(array(),$wp->request).'/media-gallery');?>"><button class="btn btn-black noradius">VIEW MORE</button></a>
+                        <?php }else{?>
+                            <div class="alert alert-mini alert-danger margin-bottom-30 text-center"><!-- DANGER -->
+                                <strong><span class="fa fa-warning"></span></strong> No media available.
+                            </div>
+                        <?php }?>
                     </div>
                 </div>
-                <div class="fighter-details-block fighter-videos row">
+                <div id="sec-fight-footage" class="fighter-details-block fighter-videos row">
                     <div class="col-md-12">
-                        <h3 class="header-red">Media Gallery</h3>
+                        <h3 class="header-red">Fight Footage</h3>
                         <div class="row">
-                            <div class="col-sm-4">
+                            <!-- <div class="col-sm-4">
                                 <div class="item-box">
                                     <figure>
                                         <span class="item-hover">
@@ -286,12 +304,88 @@
                                         </ul>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
-                        <button class="btn btn-black noradius">VIEW MORE</button>
+                        <a href="#"><button class="btn btn-black noradius">COMING SOON</button></a>
                     </div>
                 </div>
-
+                <div id="sec-road-to-glory" class="fighter-details-block fighter-gallery row">
+                    <div class="col-md-12">
+                        <h3 class="header-red">Road to Glory</h3>
+                        <div class="table-responsive">
+                        <?php
+                            $events = get_posts([
+                                'posts_per_page'   => -1,
+                                'orderby'          => 'date',
+                                'order'            => 'ASC',
+                                'post_type'        => 'events',
+                                'post_status'      => 'publish',
+                                'meta_query' => array(
+                                    'relation' => 'OR',
+                                    array(
+                                       'key' => '_ed_fighter_id',
+                                       'value' => $post->ID,
+                                       'compare' => '=',
+                                    ),
+                                    array(
+                                       'key' => '_ed_opponent_id',
+                                       'value' => $post->ID,
+                                       'compare' => '=',
+                                    )
+                                ),
+                                'suppress_filters' => true
+                            ]);
+                            if(!empty($events)){
+                        ?>
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Opponent</th>
+                                            <th>Location</th>
+                                            <th>Result</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                        <?php
+                            foreach ($events as $event) {
+                                $result = get_post_meta($event->ID,'_ed_result',true);
+                                $span_color = ['draw'=>'info','loss'=>'danger','win'=>'success','na'=>'default'];
+                                if(!empty($result)){
+                                    $result = '<span class="label label-'.$span_color[strtolower($result)].'">'.$result.'</span>';
+                                }else{
+                                    $result = '<span class="label label-default">NA</span>';
+                                }
+                                $opponent = get_post_meta($event->ID,'_ed_opponent',true);
+                                $opponentid = get_post_meta($event->ID,'_ed_opponent_id',true);
+                                if($post->ID==$opponentid){
+                                    $opponent = get_post_meta($event->ID,'_ed_fighter',true);
+                                    $opponentid = get_post_meta($event->ID,'_ed_fighter_id',true);
+                                }
+                        ?>
+                                 <tr>
+                                    <td><?=get_post_meta($event->ID,'_ed_date',true)?></td>
+                                    <td><a href="<?=get_permalink($opponentid)?>"><?=$opponent?></a></td>
+                                    <td><?=get_post_meta($event->ID,'_ed_location',true)?></td>
+                                    <td><?=$result?></td>
+                                </tr>
+                        <?php
+                            }
+                        ?>
+                                    </tbody>
+                                </table>
+                        <?php
+                            }else{
+                        ?>
+                                <div class="alert alert-mini alert-danger margin-bottom-30 text-center"><!-- DANGER -->
+                                    <strong><span class="fa fa-warning"></span></strong> No event available.
+                                </div>
+                        <?php
+                            }
+                        ?>
+                        </div>
+                    </div>
+                </div>
                 <div id="sec-biography" class="fighter-details-block fighter-biography row">
                     <div class="col-md-12">
                         <h3 class="header-red">Biography</h3>

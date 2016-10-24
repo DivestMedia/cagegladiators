@@ -51,7 +51,7 @@ add_filter('manage_posts_columns' , 'xyrthumb_columns');
 function xyrthumb_columns_data( $column, $post_id ) {
     switch ( $column ) {
         case 'featured_image':
-        echo the_post_thumbnail( 'thumb-image' );
+        echo get_the_post_thumbnail( $post_id ,'thumb-image' )?:'No Image Available';
         break;
     }
 }

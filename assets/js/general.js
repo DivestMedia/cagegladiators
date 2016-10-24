@@ -29,5 +29,13 @@ function xyrLoadImg() {
 }
 
 jQuery( function ( $ ) {
+    $("#list-fighter-nav").on('click','a',function(e) {
+        e.preventDefault();
+        $(this).parent().addClass('active').siblings().removeClass('active');
+        var sec_id = $(this).attr('href');
+        $('html, body').animate({
+            scrollTop: $(sec_id).offset().top-65
+        }, 500);
+    });
 
 });

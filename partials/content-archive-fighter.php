@@ -26,6 +26,13 @@
 						'order'            => 'DESC',
 						'post_type'        => 'fighter',
 						'post_status'      => 'publish',
+						'tax_query' => array(
+				            array(
+				                'taxonomy' => 'fighters',
+				                'field' => 'slug',
+				                'operator' => 'EXISTS'
+				            )
+				        ),
 						'suppress_filters' => true
 					]);
 	}
@@ -74,6 +81,7 @@
 			</div>
 			<div class="col-sm-9 col-md-8">
 				<?php
+					$cnt = count($fighters);
 					foreach ($fighters as $fighter) {
             			$_r_win = get_post_meta( $fighter->ID, '_uf_win', true );
             			$_r_loss = get_post_meta( $fighter->ID, '_uf_loss', true );
@@ -100,7 +108,7 @@
 				<?php
 					}
 				?>
-				<div class="pagination block"><?=posts_pagination(12)?></div>
+				<div class="pagination block"><?=posts_pagination(12,$cnt)?></div>
 			</div>
 			<div class="col-md-2 hidden-sm hidden-xs"><?php dynamic_sidebar('ads-home-left')?></div>
 		</div>
