@@ -1,27 +1,10 @@
 
-<section class="page-header dark page-header-xs">
-
-	<div class="container">
-
-		<h1><? the_title();?></h1>
-		<?php edit_post_link('<span class="font-lato size-18 weight-300 text-white"></i> '. __( 'Edit Page', XYR_SMARTY ) .'</span>' ); ?>
-		<!-- breadcrumbs -->
-		<ol class="breadcrumb">
-			<li><a href="<?=site_url();?>">Home</a></li>
-			<li class="active"><? the_title();?></li>
-		</ol><!-- /breadcrumbs -->
-
-	</div>
-</section>
-
-
-
-
-<!-- -->
 <section>
 	<div class="container">
 
-
+		<header class="text-center margin-bottom-30">
+			<h2 class="section-title"><? the_title();?></h2>
+		</header>
 		<div id="map3" class="height-300 margin-bottom-60"></div>
 
 		<div class="row">
@@ -130,7 +113,7 @@
 
 				<div class="row">
 					<div class="col-md-12">
-						<button type="submit" class="btn btn-primary noradius"> SEND MESSAGE</button>
+						<button type="submit" class="btn btn-red noradius"> SEND MESSAGE</button>
 					</div>
 				</div>
 			</form>
@@ -205,7 +188,6 @@
 			) );
 
 			?>
-			<div class="divider divider-dotted"><!-- divider --></div>
 		</div><!-- .entry-content -->
 
 

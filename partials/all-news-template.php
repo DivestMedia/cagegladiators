@@ -46,7 +46,7 @@ global $newscategory,$featuredTitle,$is_article,$totalpages,$currentpage,$pagina
 								<a href="<?=$post_url?>">
 									<figure style="border-bottom: 5px solid #1ecd6e;background-image: url('<?=$_news['post-thumbnail']?>');background-size: cover;background-repeat: no-repeat;height: 150px;"></figure>
 								</a>
-								<h4 class="margin-top-20 size-14 weight-700 uppercase height-50" style="overflow:hidden;"><a href="<?=$post_url?>"><?=xyr_smarty_limit_chars($_news['post-title'],80)?></a></h4>
+								<h4 class="margin-top-20 size-14 weight-700 uppercase height-50" style="overflow:hidden;"><a href="<?=$post_url?>"><?=trim_text($_news['post-title'],80)?></a></h4>
 								<p class="text-justify height-100" style="overflow:hidden;"><?=trim_text($_news['post-content'],180)?></p>
 								<ul class="text-left size-12 list-inline list-separator">
 									<li>

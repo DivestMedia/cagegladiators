@@ -78,8 +78,11 @@
 
 				</div>
 				<!-- /side navigation -->
+				<div class="hidden-xs">
+					<?php dynamic_sidebar('ads-home-left')?>
+				</div>
 			</div>
-			<div class="col-sm-9 col-md-8">
+			<div class="col-sm-9 col-md-10">
 				<?php
 					$cnt = count($fighters);
 					foreach ($fighters as $fighter) {
@@ -110,7 +113,6 @@
 				?>
 				<div class="pagination block"><?=posts_pagination(12,$cnt)?></div>
 			</div>
-			<div class="col-md-2 hidden-sm hidden-xs"><?php dynamic_sidebar('ads-home-left')?></div>
 		</div>
 	</div>
 </section>
