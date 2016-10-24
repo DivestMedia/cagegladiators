@@ -100,7 +100,7 @@ $featuredFighter = get_posts([
 				<div id="container-invest-divest">
 					<div class="uppercase section-title text-white text-center weight-700 size-17">Invest or Divest</div>
 					<div class="embed-responsive embed-responsive-16by9">
-						<a class="embed-responsive-item image-hover main-box lightbox" href="https://www.youtube.com/watch?v=<?=$vid_id?>" data-plugin-options='{"type":"iframe"}'>
+						<a class="embed-responsive-item main-box lightbox" href="https://www.youtube.com/watch?v=<?=$vid_id?>" data-plugin-options='{"type":"iframe"}'>
 							<span class="image-hover-icon image-hover-dark">
 								<i class="fa fa-play-circle"></i>
 							</span>
