@@ -80,7 +80,7 @@
     </div>
 </section>
 <section id="content" class="content-single-fighter nopadding">
-    <div class="container">
+    <div class="container fighter-parent-container">
         <div class="row">
             <div class="col-sm-3">
                 <div id="list-fighter-nav" class="fighter-details-block profile-nav">
