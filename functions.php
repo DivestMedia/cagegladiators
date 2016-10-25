@@ -120,7 +120,7 @@ function posts_pagination($_limit=false) {
                 echo "<li class='active'>$page</li>";
             } else {
                 if ($current_page != 1 && $current_page == $i) {
-                    echo "<li class='active'>$page</li>";
+                    echo "<li>$page</li>";
                 } else {
                     echo "<li>$page</li>";
                 }

@@ -8,12 +8,129 @@
 }
 
 
+h1{
+    span{
+        color: #ce0505;
+    }
+}
+.error-link-text{
+    color: #000;
+    &:hover{
+        color: #ce0505;
+    }
+}
+
+.pagination {
+    li{
+        span{
+            margin-right: 4px;
+            -webkit-border-radius: 3px !important;
+            -moz-border-radius: 3px !important;
+            border-radius: 3px !important;
+        }
+    }
+
+}
 div#map3{
     >div {
         filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale"); /* Firefox 10+ */
         filter: gray; /* IE6-9 */
         -webkit-filter: grayscale(99%); /* Chrome 19+ & Safari 6+ */
         -webkit-backface-visibility: hidden;  /* Fix for transition flickering */
+    }
+}
+
+section#search-container{
+    .post-title{
+        color: #666;
+        &:hover{
+            color: #ce0505;
+        }
+    }
+    ul.pagination{
+        li{
+            span.current{
+                color: #fff;
+                background-color: #e60f0f;
+                border-color: #e60f0f;
+            }
+        }
+    }
+}
+
+section#all-news-container{
+    ul.pagination{
+        li{
+            span.current{
+                color: #fff;
+                background-color: #e60f0f;
+                border-color: #e60f0f;
+            }
+        }
+    }
+    h4{
+        a:hover{
+            color: #ce0505;
+        }
+    }
+}
+
+section#news-container{
+    .orginal-link{
+        color: #666;
+        &:hover{
+            color: #ce0505;
+        }
+    }
+    #post-thumbnail{
+        border-bottom: 4px solid #e60f0f;
+    }
+    .latest-news-container{
+        .wp-post-image{
+            border-bottom: 2px solid #e60f0f;
+        }
+        .post-title{
+            color: #414141;
+            &:hover{
+                color: #ce0505;
+            }
+        }
+    }
+    #featured-news-container{
+        background-color: #333;
+        padding: 30px 0;
+        .wp-post-image{
+            border-bottom: 3px solid #e60f0f;
+        }
+        .featured-news{
+            h3{
+                a{
+                    color:#fff;
+                    &:hover{
+                        color: #ce0505;
+                    }
+                }
+            }
+            .list-inline{
+                border: none;
+                li,a{
+                    color: #fff;
+                }
+            }
+            .post-content{
+                color: #fff;
+            }
+        }
+    }
+    #other-news-container{
+        .wp-post-image{
+            border-bottom: 3px solid #e60f0f;
+        }
+        h4{
+            a:hover{
+                color: #ce0505;
+            }
+        }
     }
 }
 
@@ -37,15 +154,46 @@ section#section-media-gallery{
     }
 }
 
-section#section-fighters{
+.section-fighters{
+    .featured-figter-container{
+        .section-title{
+            span{
+                color: #ce0505;
+            }
+        }
+        .section-title,h4,.record-cont{
+            color: #fff;
+        }
+        .container-fighters{
+            padding-bottom:30px;
+            &:hover{
+                .thumbnail{
+                    background-color: #b00;
+                    border-bottom: 5px solid #ce0505;
+                }
+            }
+            .thumbnail{
+                border: none;
+                border-bottom: 5px solid #333333;
+                transition: all 0.7s ease;
+
+                background: #bbb;
+            }
+        }
+    }
     .container-fighters{
         padding-bottom:30px;
-        .thumbnail{
-            border-bottom: 5px solid #333333;
-            background: #bbb;
-            &:hover{
-                border-bottom: 5px solid #e60f0f;
+        &:hover{
+            .thumbnail{
+                border-bottom: 5px solid #ce0505;
             }
+        }
+        .thumbnail{
+            border: none;
+            border-bottom: 5px solid #333333;
+            transition: all 0.7s ease;
+
+            background: #bbb;
         }
         .lbl-weightclass{
             color: #e60f0f;
@@ -150,8 +298,10 @@ section#home-main-container{
         background-blend-mode: luminosity;
         background-color: #000;
         border-bottom: 4px solid #dd2424;
+        min-height: 250px;
         .section-title{
-            padding: 3px 0;
+            font-family: proximanova,Helvetica,Arial,sans-serif!important;
+            padding: 15px 0;
             background-color: #ce0505;
         }
         .gym-name{
@@ -177,6 +327,12 @@ section#home-main-container{
             background-color: #fff;
             padding: 10px 10px 0;
             .nav-tabs{
+                li{
+                    a{
+                        border-radius: 0 !important;
+                        border: none;
+                    }
+                }
                 li.active{
                     a{
                         background-color: #950606;
@@ -234,9 +390,10 @@ section#home-main-container{
                     padding: 10px;
                     background-color: #fff;
                     .section-title{
+                        font-family: proximanova,Helvetica,Arial,sans-serif!important;
                         width: 50%;
                         min-width: 220px;
-                        padding: 3px 0;
+                        padding: 15px 0;
                         background-color: #ce0505;
                     }
                     .latest-news-container{
@@ -268,6 +425,12 @@ section#home-main-container{
                                 background-color: rgba(255,255,255,0.8);
                                 color: #000;
                                 padding:5px 10px;
+                                a{
+                                    color: #060402;
+                                    &:hover{
+                                        color: #ce0505;
+                                    }
+                                }
                             }
                         }
                     }
@@ -284,6 +447,9 @@ section#home-main-container{
                             margin:10px 0;
                             a{
                                 color: #434343;
+                                 &:hover{
+                                        color: #ce0505;
+                                    }
                             }
                         }
                     }
@@ -294,9 +460,10 @@ section#home-main-container{
             background-color: #fff;
             padding: 10px 0 0;
             .section-title{
+                font-family: proximanova,Helvetica,Arial,sans-serif!important;
                 width: 50%;
                 min-width: 220px;
-                padding: 3px 0;
+                padding: 15px 0;
                 background-color: #ce0505;
                 margin:0 0 10px 10px;
             }
@@ -707,9 +874,10 @@ section#vip-subscriber{
     background-color: #fff;
     padding: 10px 0 0;
     .section-title{
+        font-family: proximanova,Helvetica,Arial,sans-serif!important;
         width: 50%;
         min-width: 220px;
-        padding: 3px 0;
+        padding: 15px 0;
         background-color: #ce0505;
         margin:0 0 10px 10px;
     }

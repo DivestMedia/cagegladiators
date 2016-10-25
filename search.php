@@ -38,7 +38,7 @@
     $news_rs = $RSSFIRUL->getFeedItemsByUrl('all news',10,$cur_page,$news_rs);
   }
 ?>
-<section class="">
+<section id="search-container">
   <div class="container">
     <div class="left-content align-left">
       <div class="row">
@@ -58,13 +58,19 @@
                 </a>
               </div>
               <div class="col-md-9 col-sm-9 col-xs-12 cont-episode-details">
-                <a href="<?=$post_url?>" title="<?=$news['post-title']; ?>" class="size-17"><strong><?=$news['post-title']; ?></strong></a>
+                <a href="<?=$post_url?>" title="<?=$news['post-title']; ?>" class="size-17 post-title"><strong><?=$news['post-title']; ?></strong></a>
                 <?php if(!empty($news['published-date'])){?>
-                    <p class="margin-bottom-10"><small><i class="fa fa-calendar"></i>
-                    <?=$news['published-date']?></small></p>
+                    <p class="margin-bottom-10">
+                      <small>
+                      <?php if(!empty($news['published-date'])){?>
+                        <i class="fa fa-calendar fa-fw"></i>
+                        <?php echo date('F d, Y',strtotime($news['published-date'])); 
+                      }?>
+                      </small>
+                    </p>
                     <?php }?>
                 <p class="margin-bottom-10"><?=trim_text(strip_tags($news['post-content']), 230)?></p>
-                <a href="<?=$post_url?>"><button class="btn btn-red btn-sm pull-right">Read more...</button></a>
+                <a href="<?=$post_url?>"><button class="btn btn-red btn-sm pull-right">Read More</button></a>
               </div>
             </div>
         <?php

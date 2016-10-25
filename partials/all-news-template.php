@@ -3,7 +3,7 @@ get_header();
 global $newscategory,$featuredTitle,$is_article,$totalpages,$currentpage,$paginationbase;
 ?>
 
-<section class="alternate">
+<section class="alternate" id="all-news-container">
 	<div class="container">
 		<header class="text-center margin-bottom-10 tiny-line">
 			<h2 class="font-proxima uppercase"><?=($featuredTitle)?></h2>
@@ -44,7 +44,7 @@ global $newscategory,$featuredTitle,$is_article,$totalpages,$currentpage,$pagina
 							?>
 							<div class="col-sm-4">
 								<a href="<?=$post_url?>">
-									<figure style="border-bottom: 5px solid #1ecd6e;background-image: url('<?=$_news['post-thumbnail']?>');background-size: cover;background-repeat: no-repeat;height: 150px;"></figure>
+									<figure style="border-bottom: 5px solid #e60f0f;background-image: url('<?=$_news['post-thumbnail']?>');background-size: cover;background-repeat: no-repeat;height: 150px;"></figure>
 								</a>
 								<h4 class="margin-top-20 size-14 weight-700 uppercase height-50" style="overflow:hidden;"><a href="<?=$post_url?>"><?=trim_text($_news['post-title'],80)?></a></h4>
 								<p class="text-justify height-100" style="overflow:hidden;"><?=trim_text($_news['post-content'],180)?></p>
@@ -52,7 +52,7 @@ global $newscategory,$featuredTitle,$is_article,$totalpages,$currentpage,$pagina
 									<li>
 										<?php if(!empty($_news['published-date'])){?>
 										<i class="fa fa-calendar"></i>
-										<?=$_news['published-date']?>
+										<?=date('F d, Y',strtotime($_news['published-date']))?>
 										<?php }?>
 									</li>
 								</ul>
