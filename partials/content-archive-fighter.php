@@ -19,8 +19,8 @@
 		$fighters = get_posts([
 						'posts_per_page'   => 12,
 						'paged' 			=> get_query_var('paged') ?: 1,
-						'orderby'          => 'date',
-						'order'            => 'DESC',
+						'orderby'          => 'title',
+						'order'            => 'ASC',
 						'post_type'        => 'fighter',
 						'post_status'      => 'publish',
 						'tax_query' => array(
@@ -47,8 +47,8 @@
 		$fighters = get_posts([
 						'posts_per_page'   => 12,
 						'paged' 			=> get_query_var('paged') ?: 1,
-						'orderby'          => 'date',
-						'order'            => 'DESC',
+						'orderby'          => 'title',
+						'order'            => 'ASC',
 						'post_type'        => 'fighter',
 						'post_status'      => 'publish',
 						'tax_query' => array(

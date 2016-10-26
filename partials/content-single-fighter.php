@@ -60,12 +60,12 @@
     <div class="ff-bg-gray">
         <div class="container">
             <div class="row fighter-solo">
-                <div class="col-sm-3 text-right fighter-details margin-bottom-20">
+                <div class="col-md-3 hidden-sm hidden-xs text-right fighter-details margin-bottom-20">
                     <?php if(!empty($post->post_excerpt)){?>
                     <p class="text-white size-18 fighter-profile-motto font-proximanova"><?=$post->post_excerpt?></p>
                     <?php }?>
                 </div>
-                <div class="col-sm-9 fighter-details">
+                <div class="col-md-9 fighter-details">
                     <div>
                     </div>
                     <div class="fighter-name">
@@ -82,7 +82,7 @@
 <section id="content" class="content-single-fighter nopadding">
     <div class="container fighter-parent-container">
         <div class="row">
-            <div class="col-sm-3">
+            <div class="col-md-3 hidden-sm hidden-xs">
                 <div id="list-fighter-nav" class="fighter-details-block profile-nav">
                     <ul class="nav nav-pills nav-stacked" role="tablist">
                         <li class="active"><a href="#sec-profile">Profile</a></li>
@@ -93,7 +93,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-sm-9">
+            <div class="col-md-9">
                 <div id="sec-profile" class="fighter-details-block fighter-stats row">
                     <!-- H3 -->
                     <div class="heading-title heading-border-bottom margin-bottom-30">
@@ -219,9 +219,10 @@
                         </div>
                         <a href="<?php global $wp; echo home_url(add_query_arg(array(),$wp->request).'/media-gallery');?>"><button class="btn btn-black noradius">VIEW MORE</button></a>
                         <?php }else{?>
-                            <div class="alert alert-mini alert-danger margin-bottom-30 text-center"><!-- DANGER -->
-                                <strong><span class="fa fa-warning"></span></strong> No media available.
+                            <div class="margin-bottom-30 text-center"><!-- DANGER -->
+                                 <h2 class="text-gray">No media available</h2>
                             </div>
+
                         <?php }?>
                     </div>
                 </div>
@@ -306,7 +307,9 @@
                                 </div>
                             </div> -->
                         </div>
-                        <a href="#"><button class="btn btn-black noradius">COMING SOON</button></a>
+                        <div class="text-center">
+                            <h2 class="text-gray">Coming Soon</h2>
+                        </div>
                     </div>
                 </div>
                 <div id="sec-road-to-glory" class="fighter-details-block fighter-gallery row">
@@ -377,8 +380,8 @@
                         <?php
                             }else{
                         ?>
-                                <div class="alert alert-mini alert-danger margin-bottom-30 text-center"><!-- DANGER -->
-                                    <strong><span class="fa fa-warning"></span></strong> No event available.
+                                <div class="margin-bottom-30 text-center"><!-- DANGER -->
+                                    <h2 class="text-gray">No event available</h2>
                                 </div>
                         <?php
                             }

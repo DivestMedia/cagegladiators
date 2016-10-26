@@ -126,7 +126,7 @@ data-background="assets/images/boxed_background/1.jpg"
 				<!-- /BUTTONS -->
 
 				<!-- Logo -->
-				<a class="logo pull-left" href="<?=site_url()?>">
+				<a class="custom-logo pull-left" href="<?=site_url()?>">
 					<img src="<?=get_stylesheet_directory_uri();?>/assets/img/header-logo-light.png" alt="" />
 				</a>
 

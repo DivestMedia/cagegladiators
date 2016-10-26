@@ -1,7 +1,7 @@
 <?php
 	get_header();
 ?>
-	<section id="section-media-gallery">
+	<section id="section-media-gallery" class="dark">
 		<div class="container">
 			<div class="row">
 				<!-- <div class="col-md-2 container-fighter-info">
@@ -25,7 +25,7 @@
                         </div>
                         <?php }?>
 				</div>
-				<div class="col-md-2">
+				<div class="col-md-2 hidden-sm hidden-xs">
 					<?php dynamic_sidebar('ads-home-left')?>
 				</div>
 			</div>

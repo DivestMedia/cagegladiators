@@ -8,7 +8,7 @@
 }
 
 
-h1{
+h1,h2{
     span{
         color: #ce0505;
     }
@@ -135,7 +135,6 @@ section#news-container{
 }
 
 section#section-media-gallery{
-        background: #333;
     .container-fighter-info{
             background: #333;
             h1{
@@ -255,13 +254,28 @@ ul.nav-tabs {
 header#topNav{
     border-top: 2px solid #dd2424;
     background-color: #333;
-    .logo{
+    @media only screen and (max-width: 992px){
+        .custom-logo{
+            height: 58px !important;
+            img{
+                padding: 15px 15px 0;
+            }
+        }
+    }
+    @media only screen and (min-width: 993px){
+        .custom-logo{
+            img{
+                padding: 20px 15px 0;
+            }
+        }
+    }
+    .custom-logo{
         background-color: #e60f0f;
         width: 215px;
+        height: 70px;
         img{
             height: auto !important;
             width: 100% !important;
-            padding: 15px 15px 0;
         }
     }
 }
@@ -723,7 +737,6 @@ section#main-featured-fighter{
         .fighter-details{
             height: 450px;
             vertical-align: initial!important;
-            display: block!important;
             float: left!important;
             .fighter-name{
                 position: absolute;
