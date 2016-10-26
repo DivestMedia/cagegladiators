@@ -70,7 +70,7 @@
                     </p>
                     <?php }?>
                 <p class="margin-bottom-10"><?=trim_text(strip_tags($news['post-content']), 230)?></p>
-                <a href="<?=$post_url?>"><button class="btn btn-red btn-sm pull-right">Read More</button></a>
+                <a href="<?=$post_url?>"><button class="btn btn-red btn-sm pull-right noradius">Read More</button></a>
               </div>
             </div>
         <?php

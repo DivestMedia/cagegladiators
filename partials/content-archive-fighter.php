@@ -81,7 +81,7 @@
 	if(empty($fighters)){
 		// die();
 	}
-	if(empty($current_page_info->slug)){
+	if(empty($current_page_info->slug)&&get_query_var('paged')==0){
 ?>
 
 <section class="dark section-fighters">
