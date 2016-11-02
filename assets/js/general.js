@@ -29,6 +29,70 @@ function xyrLoadImg() {
 }
 
 jQuery( function ( $ ) {
+    var cur_page = 2;
+    if($('.table-event.paginated').length){
+        $('.table-event.paginated').each(function() {
+            var currentPage = 0;
+            var numPerPage = 10;
+            var $table = $(this);
+            $table.bind('repaginate', function() {
+                $table.find('tbody tr').hide().slice(currentPage * numPerPage, (currentPage + 1) * numPerPage).show();
+            });
+            $table.trigger('repaginate');
+            var numRows = $table.find('tbody tr').length;
+            var numPages = Math.ceil(numRows / numPerPage);
+            var $pager = $('<ul class="pagination"></ul>');
+            if(numPages>1){
+                for (var page = 0; page < numPages; page++) {
+                    $('<li class="page-number"></li>').html('<a>'+(page + 1)+'</a>').bind('click', {
+                        newPage: page
+                    }, function(event) {
+                        currentPage = event.data['newPage'];
+                        $table.trigger('repaginate');
+                        $(this).addClass('active').siblings().removeClass('active');
+                    }).appendTo($pager).addClass('clickable');
+                }
+                $pager.insertAfter($table).find('li.page-number:first').addClass('active');
+            }
+        });
+    }
+
+    $('.btn-showmorenews').click(function(){
+        $(this).hide().siblings('.progress').show();
+        var cat = $('.list-group').find('.active').data('cat');
+        $.ajax({
+            url: "/news/",
+            dataType: 'json',
+            type: 'POST',
+            data: {
+                'action':'getnews',
+                'page':cur_page,
+                'cat':cat
+            },
+            success: function(result){
+                console.log(result);
+                if(result.length<=6&&result.length>0){
+                    cur_page++;
+                    $.each(result,function(i,n){
+                        var post_url = window.location.origin+'/news/'+n['post-id']+'/'+n['post-name'];
+                        $('#news-row').append('<div class="col-sm-4"><a href="'+post_url+'"><figure style="border-bottom: 5px solid #e60f0f;background-image: url('+n['post-thumbnail']+');background-size: cover;background-repeat: no-repeat;height: 150px;"></figure></a><h4 class="margin-top-20 size-14 weight-700 uppercase height-50" style="overflow:hidden;"><a href="'+post_url+'">'+n['post-title']+'</a></h4><p class="text-justify height-100" style="overflow:hidden;">'+n['post-content']+'</p><ul class="text-left size-12 list-inline list-separator"><li>'+n['published-date']+'</li></ul></div>');
+                    });
+
+                    $('.btn-showmorenews').show().siblings('.progress').hide();
+                }else{
+                    $('.btn-showmorenews').hide().siblings('.progress').hide();
+                }
+            },
+            error: function(errorThrown){console.log(errorThrown);}
+        });
+    });
+
+    if($('#all-news-container').length){
+        $(window).scroll(function(){
+            var window_top = $(window).scrollTop();
+        });
+    }
+
     if($('#list-fighter-nav').length){
         $(window).scroll(function(){
             clearTimeout($.data(this, 'scrollTimer'));

@@ -7,6 +7,40 @@
     font-family: "proximanova", Helvetica, Arial, sans-serif!important;
 }
 
+#widget-latest-news{
+    a:hover{
+        color: #ce0505;
+    }
+    .fa-calendar{
+        margin-right: 5px;
+    }
+}
+
+#custom-search-form{
+    input{
+        background: #fff;
+        border: #e3e3e3 1px solid;
+        color: #aaa;
+        float: left;
+        font-size: 13px;
+        height: 39px;
+        letter-spacing: 1px;
+        margin: 0;
+        padding: 5px 50px 5px 10px;
+        width: 100%;
+    }
+    button{
+        background: rgba(0, 0, 0, 0);
+        border-left: #e3e3e3 1px solid;
+        font-size: 17px;
+        width: 39px;
+        height: 39px;
+        line-height: 39px;
+        vertical-align: bottom;
+        position: absolute;
+        right: 15px;
+    }
+}
 
 h1,h2{
     span{
@@ -31,15 +65,9 @@ h1,h2{
     }
 
 }
-div#map3{
-    >div {
-        filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale"); /* Firefox 10+ */
-        filter: gray; /* IE6-9 */
-        -webkit-filter: grayscale(99%); /* Chrome 19+ & Safari 6+ */
-        -webkit-backface-visibility: hidden;  /* Fix for transition flickering */
-    }
+section#slider{
+    z-index: 2 !important;
 }
-
 section#search-container{
     .post-title{
         color: #666;
@@ -59,6 +87,12 @@ section#search-container{
 }
 
 section#all-news-container{
+    .progress{
+        display: none;
+        .progress-bar{
+            border-radius: 3px;
+        }
+    }
     ul.pagination{
         li{
             span.current{
@@ -576,6 +610,9 @@ section#home-main-container{
         }
     }
 }
+section#vip-subscriber{
+     z-index: 7;
+}
 section#featured-fighter{
     height: 100%;
     background-color: #000000;
@@ -586,7 +623,7 @@ section#featured-fighter{
     position:relative;
     margin-bottom: -80px;
     margin-top: 6px;
-
+    z-index: 6;
     >div.container{
         .fighter-details{
             vertical-align: bottom;
@@ -625,12 +662,40 @@ section#main-featured-fighter{
     z-index: 1;
     background-color: #b9b8b8;
     margin-bottom: -83px;
-    overflow: hidden;
     border-bottom: 15px solid #212121;
+    #wrapper_mbYTP_YTPlayer{
+        transform: skew(0deg,4deg);
+        -ms-transform:skew(0deg,8deg);
+        -webkit-transform:skew(0deg,4deg);
+        top: 121px !important;
+        height: 130% !important;
+    }
+    .overlay{
+        transform: skew(0deg,4deg);
+        -ms-transform:skew(0deg,8deg);
+        -webkit-transform:skew(0deg,4deg);
+        top: 121px;
+        height: 130% !important;
+    }
+    .fighter-background-image{
+        transform: skew(0deg,4deg);
+        -ms-transform:skew(0deg,8deg);
+        -webkit-transform:skew(0deg,4deg);
+        height: 130%!important;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 121px;
+        bottom: 0;
+        background-color: #b9b8b8;
+        z-index: -1;
+    }
     @media (min-width: 0) and (max-width: 768px){
         margin-top: -5px;
         padding: 10% 0 25px 0;
-        height: 298px;
+        .ff-bg-red{
+            height: 85% !important;
+        }
     }
     @media (min-width: 768px) and (max-width: 992px){
         padding: 60px 0 25px 0;
@@ -656,6 +721,7 @@ section#main-featured-fighter{
         z-index: -1;
     }
     .ff-bg-gray{
+        z-index: 1;
         >div.container{
             .fighter-details{
                 vertical-align: bottom;
@@ -678,6 +744,7 @@ section#main-featured-fighter{
                     color: #fff;
                 }
                 .fighter-name{
+                    z-index: 3 !important;
                     h1{
                         font-weight: 900;
                         line-height: 1 !important;
@@ -688,7 +755,7 @@ section#main-featured-fighter{
                 img.fighter-image{
                     height: auto;
                     position: absolute;
-                    z-index: -1;
+                    z-index: 2;
                     @media (min-width: 0) and (max-width: 768px){
                         width: 94%;
                         max-width: 590px;
@@ -738,21 +805,30 @@ section#main-featured-fighter{
             height: 450px;
             vertical-align: initial!important;
             float: left!important;
+            @media (min-width: 0) and (max-width: 991px){
+                float: none!important;
+                width: 100%;
+                .fighter-name{
+                    .name-line-1{
+                        font-size: 85px !important;
+                    }
+                    .name-line-2{
+                        font-size:110px !important;
+                    }
+                }
+            }
             .fighter-name{
                 position: absolute;
                 left: 0;
                 bottom: 100px;
                 .name-line-1{
-                    font-size: 80px;
-                    color: #fff;
-                    font-weight: bold;
-                    line-height: 100px;
+                    margin-bottom: 0;
+                    font-size: 100px;
                 }
                 .name-line-2{
-                    font-size: 120px;
-                    font-weight: bold;
-                    color: red;
-                    line-height: 100px;
+                    color:#e60f0f;
+                    margin-top: -20px;
+                    font-size:140px;
                 }
             }
             .fighter-image{
@@ -761,6 +837,8 @@ section#main-featured-fighter{
                 width: auto!important;
                 left: 50%!important;
                 position: absolute!important;
+                z-index: 1 !important;
+
             }
         }
     }
@@ -776,6 +854,10 @@ section#main-featured-fighter{
         }
     }
 
+}
+section#sec-footer{
+    padding: 0;
+    z-index: 7;
 }
 footer#footer{
     background: #000000;
@@ -925,13 +1007,14 @@ section#vip-subscriber{
 
 #content{
     &.content-single-fighter{
-        border-top: 325px solid #b9b8b8;
-        margin-top: -75px;
+        // border-top: 325px solid #b9b8b8;
+        margin-top: 240px;
         background: #333333;
 
         transform: skew(0deg,4deg);
         -ms-transform:skew(0deg,8deg);
         -webkit-transform:skew(0deg,4deg);
+        z-index: 5;
         > .container{
             top: -250px;
             transform: skew(0deg,-4deg);
@@ -943,6 +1026,17 @@ section#vip-subscriber{
             padding: 30px;
             background: #fff;
             margin-bottom: 20px;
+            .embed-responsive-item{
+                .image-hover-icon{
+                    // display: none;
+                    opacity: 1;
+                }
+                &:hover{
+                    .image-hover-icon{
+                        display: block;
+                    }
+                }
+            }
             &.fighter-stats{
                 .share-fighter{
                     a{
@@ -955,6 +1049,9 @@ section#vip-subscriber{
 
                 .fighter-info{
                     margin-bottom: 50px;
+                    @media (min-width: 0) and (max-width: 768px){
+                        margin-bottom: 20px;
+                    }
                     label{
                         margin-bottom: 0;
                         font-weight: bold;

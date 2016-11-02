@@ -54,8 +54,45 @@
         $_t_images = explode(',', $fighter_images['_uf_image']);
         $media_gallery = array_slice($_t_images,3);
     }
+
+    $fighter_videos = get_post_meta( $post->ID, '_uf_video', true );
+    if(!empty($fighter_videos)){
+        $fighter_videos = explode(',', $fighter_videos);
+    }
+
+    // $featuredVideo = get_posts([
+    //     'post_type'   => 'iod_video',
+    //     'post_status' => 'publish',
+    //     'posts_per_page' => 1,
+    //     'posts_per_archive_page' => 1,
+    //     'orderby' => 'rand',
+    //     'tax_query' => array(
+    //         array(
+    //             'taxonomy' => 'iod_category',
+    //             'field' => 'name',
+    //             'terms' => 'Fight Footage'
+    //         )
+    //     ),
+    //     'exclude' => []
+    // ]);
+    if(!empty($fighter_videos[0])){
+        $video = $fighter_videos[0];
+        $iod_video = json_decode(get_post_meta( $video, '_iod_video',true))->embed->url;
+        $ytpattern = '/^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/';
+        if(preg_match($ytpattern,$iod_video,$vid_id)){
+            $vid_id = end($vid_id);
+            $iod_video_thumbnail = 'http://img.youtube.com/vi/'.$vid_id.'/mqdefault.jpg';
+        }else{
+            $iod_video_thumbnail = 'http://www.askgamblers.com/uploads/original/isoftbet-2-5474883270a0f81c4b8b456b.png';
+        };
+    }
 ?>
 <section id="main-featured-fighter" class="fighter-solo-section">
+    <div class="fighter-background-image"></div>
+    <?php if(!empty($vid_id)){?>
+    <div class="overlay dark-2"><!-- dark overlay [0 to 9 opacity] --></div>
+    <a id="YTPlayer" class="player" data-property="{videoURL:'http://www.youtube.com/watch?v=<?=$vid_id?>',containment:'#main-featured-fighter',autoPlay:true, mute:true, startAt:5, stopAt:20, opacity:1, loop:1, showControls:false}">youtube</a>
+    <?php }?>
     <div class="ff-bg-red"></div>
     <div class="ff-bg-gray">
         <div class="container">
@@ -69,9 +106,9 @@
                     <div>
                     </div>
                     <div class="fighter-name">
-                        <h3 class="uppercase nomargin weight-900 font-proximanova text-black">Fighter Profile</h3>
-                        <h1 class="text-white uppercase size-100" style="margin-bottom: 0;"><?=$fighter_details['_uf_firstname']?></h1>
-                        <h1 class="uppercase" style="color:#e60f0f;margin-top: -20px;font-size:140px;"><?=$fighter_details['_uf_lastname']?></h1>
+                        <h3 class="uppercase nomargin weight-900 font-proximanova <?=!empty($vid_id)?'text-white':'text-black'?>">Fighter Profile</h3>
+                        <h1 class="text-white uppercase name-line-1"><?=$fighter_details['_uf_firstname']?></h1>
+                        <h1 class="uppercase name-line-2" style=""><?=$fighter_details['_uf_lastname']?></h1>
                     </div>
                     <img class="fighter-image" src="<?=wp_get_attachment_image_src($fighter_images['_uf_image_right'],'full')[0]?>" alt="">
                 </div>
@@ -85,7 +122,8 @@
             <div class="col-md-3 hidden-sm hidden-xs">
                 <div id="list-fighter-nav" class="fighter-details-block profile-nav">
                     <ul class="nav nav-pills nav-stacked" role="tablist">
-                        <li class="active"><a href="#sec-profile">Profile</a></li>
+                        <?php if(!empty($vid_id)){?><li class="active"><a href="#sec-profile-vid">Fighter Videos</a></li><?php }?>
+                        <li <?=empty($vid_id)?'class="active"':''?>><a href="#sec-profile">Profile</a></li>
                         <li><a href="#sec-mediagallery">Media Gallery</a></li>
                         <li><a href="#sec-fight-footage">Fight Footage</a></li>
                         <li><a href="#sec-road-to-glory">Road to Glory</a></li>
@@ -94,6 +132,20 @@
                 </div>
             </div>
             <div class="col-md-9">
+            <?php if(!empty($vid_id)){?>
+                <div id="sec-profile-vid" class="fighter-details-block fighter-videos row">
+                    <div class="col-sm-6">
+                        <div class="embed-responsive embed-responsive-16by9" style="border-bottom: 5px solid #ce0505;">
+                            <a class="embed-responsive-item main-box lightbox" href="https://www.youtube.com/watch?v=<?=$vid_id?>" data-plugin-options='{"type":"iframe"}'>
+                                <span class="image-hover-icon image-hover-dark">
+                                    <i class="fa fa-play-circle"></i>
+                                </span>
+                                <img src="http://i3.ytimg.com/vi/<?=$vid_id?>/maxresdefault.jpg" alt="..." class="img-responsive">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <?php }?>
                 <div id="sec-profile" class="fighter-details-block fighter-stats row">
                     <!-- H3 -->
                     <div class="heading-title heading-border-bottom margin-bottom-30">
@@ -112,13 +164,13 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-5">
-                            <div class="col-sm-6">
+                            <div class="col-xs-6">
                                 <div class="piechart nomargin" data-color="#e60f0f" data-size="100" data-percent="100" data-width="3" data-animate="1000">
                                     <span class="countTo font-raleway" data-speed="1000"><?=$fighter_details['_uf_win']?></span>
                                     <label>WINS</label>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-xs-6">
                                 <div class="piechart nomargin" data-color="#999999" data-size="100" data-percent="100" data-width="3" data-animate="1000">
                                     <span class="countTo font-raleway" data-speed="1000"><?=$fighter_details['_uf_loss']?></span>
                                     <label>LOSSES</label>
@@ -170,15 +222,15 @@
                         </div>
                         <div class="col-sm-7">
                             <div class="row">
-                                <div class="col-sm-4 fighter-info">
+                                <div class="col-xs-4 fighter-info">
                                     <label>HEIGHT</label>
                                     <strong><?=$fighter_details['_uf_height']?></strong>
                                 </div>
-                                <div class="col-sm-4 fighter-info">
+                                <div class="col-xs-4 fighter-info">
                                     <label>WEIGHT</label>
                                     <strong><?=$fighter_details['_uf_weight']?></strong>
                                 </div>
-                                <div class="col-sm-4 fighter-info">
+                                <div class="col-xs-4 fighter-info">
                                     <label>BORN</label>
                                     <strong><?=!empty($fighter_details['_uf_birthday'])?date('m/d/Y',strtotime($fighter_details['_uf_birthday'])):'NA'?></strong>
                                 </div>
@@ -319,7 +371,8 @@
                         <?php
                             $events = get_posts([
                                 'posts_per_page'   => -1,
-                                'orderby'          => 'date',
+                                'meta_key'          => '_ed_date',
+                                'orderby'          => 'meta_value_datetime',
                                 'order'            => 'ASC',
                                 'post_type'        => 'events',
                                 'post_status'      => 'publish',
@@ -340,9 +393,10 @@
                             ]);
                             if(!empty($events)){
                         ?>
-                                <table class="table table-hover">
+                                <table class="table table-hover table-event paginated">
                                     <thead>
                                         <tr>
+                                            <th>Title</th>
                                             <th>Date</th>
                                             <th>Opponent</th>
                                             <th>Location</th>
@@ -354,22 +408,36 @@
                             foreach ($events as $event) {
                                 $result = get_post_meta($event->ID,'_ed_result',true);
                                 $span_color = ['draw'=>'info','loss'=>'danger','win'=>'success','na'=>'default'];
-                                if(!empty($result)){
-                                    $result = '<span class="label label-'.$span_color[strtolower($result)].'">'.$result.'</span>';
-                                }else{
-                                    $result = '<span class="label label-default">NA</span>';
-                                }
+                                
+                                $location = get_post_meta($event->ID,'_ed_location',true);
+                                $decision = get_post_meta($event->ID,'_ed_decision',true);
+
                                 $opponent = get_post_meta($event->ID,'_ed_opponent',true);
                                 $opponentid = get_post_meta($event->ID,'_ed_opponent_id',true);
+
                                 if($post->ID==$opponentid){
                                     $opponent = get_post_meta($event->ID,'_ed_fighter',true);
                                     $opponentid = get_post_meta($event->ID,'_ed_fighter_id',true);
+                                    if($result=='Win')
+                                        $result='Loss';
+                                    elseif($result=='Loss')
+                                        $result='Win';
+                                }
+
+                                if(!empty($result)){
+                                    if(!strcasecmp($result, 'NA'))
+                                        $result = '<span class="label label-'.$span_color[strtolower($result)].'">'.$result.'</span>';
+                                    else
+                                        $result = '<span class="label label-'.$span_color[strtolower($result)].'">'.$result.' | '.$decision.'</span>';
+                                }else{
+                                    $result = '<span class="label label-default">NA</span>';
                                 }
                         ?>
-                                 <tr>
+                                <tr>
+                                    <td><?=get_the_title($event->ID)?></td>
                                     <td><?=get_post_meta($event->ID,'_ed_date',true)?></td>
                                     <td><a href="<?=get_permalink($opponentid)?>"><?=$opponent?></a></td>
-                                    <td><?=get_post_meta($event->ID,'_ed_location',true)?></td>
+                                    <td><?=$location?:'N/A'?></td>
                                     <td><?=$result?></td>
                                 </tr>
                         <?php

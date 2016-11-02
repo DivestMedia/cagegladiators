@@ -21,7 +21,7 @@ global $newscategory,$featuredTitle,$is_article,$totalpages,$currentpage,$pagina
 						</div>
 						<ul class="list-group list-unstyled nav nav-tabs nav-stacked nav-alternate uppercase">
 							<?php foreach ($newscategory as $category): ?>
-								<li class="list-group-item <?=((!empty($category['active']) && $category['active']==true) ? 'active' : '')?>">
+								<li class="list-group-item <?=((!empty($category['active']) && $category['active']==true) ? 'active" data-cat="'.$category['slug'].'"' : '"')?> >
 									<a href="<?=($category['link'] ?: '#')?>"><?=($category['name'] ?: 'Uncategorized')?></a>
 								</li>
 							<?php endforeach;?>
@@ -32,11 +32,10 @@ global $newscategory,$featuredTitle,$is_article,$totalpages,$currentpage,$pagina
 				</div>
 				<!-- /side navigation -->
 			</div>
-			<div class="col-sm-9">
+			<div class="col-sm-12 col-md-9">
 				<div class="tab-content">
 					<div class="tab-pane fade in active" id="planning">
 						<div class="row" id="news-row">
-
 							<?php
 							if(count($_all_news)):
 								foreach($_all_news as $_news):
@@ -63,45 +62,49 @@ global $newscategory,$featuredTitle,$is_article,$totalpages,$currentpage,$pagina
 								echo '<h4 class="text-center">No Articles yet</h4>';
 							endif;
 							?>
-
-
+						</div>
+						<div class="text-center">
+							<button class="btn btn-red btn-sm btn-showmorenews noradius"><strong>Show More</strong></button>
+							<div class="progress" style="display: none;">
+								<div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+								</div>
+							</div>
+						</div>
+						<?php 
+							// $pages = paginate_links(array(
+							// 	'base'               => $paginationbase,
+							// 	'format'             => '%#%',
+							// 	'total'              => $totalpages,
+							// 	'current'            => $currentpage,
+							// 	'show_all'           => false,
+							// 	'prev_next'          => true,
+							// 	'prev_text' 		=> '&larr; Prev',
+							//     'next_text' 		=> 'Next &rarr;',
+							// 	'type'               => 'array',
+							// 	'add_args'           => false,
+							// )); 		
+							// if (is_array($pages)) {
+						 //        echo '<ul class="pagination">';
+						 //        foreach ($pages as $i => $page) {
+						 //            if ($currentpage == 1 && $i == 0) {
+						 //                echo "<li class='active'>$page</li>";
+						 //            } else {
+						 //                if ($currentpage != 1 && $currentpage == $i) {
+						 //                    echo "<li class='active'>$page</li>";
+						 //                } else {
+						 //                    echo "<li>$page</li>";
+						 //                }
+						 //            }
+						 //        }
+						 //        echo '</ul>';
+						 //    }
+						?>
+					</div>
+				</div>
+			</div>
 		</div>
-		<?php 
-		$pages = paginate_links(array(
-			'base'               => $paginationbase,
-			'format'             => '%#%',
-			'total'              => $totalpages,
-			'current'            => $currentpage,
-			'show_all'           => false,
-			'prev_next'          => true,
-			'prev_text' 		=> '&larr; Prev',
-		    'next_text' 		=> 'Next &rarr;',
-			'type'               => 'array',
-			'add_args'           => false,
-		)); 		
-		if (is_array($pages)) {
-	        echo '<ul class="pagination">';
-	        foreach ($pages as $i => $page) {
-	            if ($currentpage == 1 && $i == 0) {
-	                echo "<li class='active'>$page</li>";
-	            } else {
-	                if ($currentpage != 1 && $currentpage == $i) {
-	                    echo "<li class='active'>$page</li>";
-	                } else {
-	                    echo "<li>$page</li>";
-	                }
-	            }
-	        }
-	        echo '</ul>';
-	    }
-?>
-		
+		<!-- Tab v3 -->
 	</div>
-</div>
-</div>
-</div>
-<!-- Tab v3 -->
-</div>
 </section>
 <?php
 get_footer();
