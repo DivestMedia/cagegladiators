@@ -13,6 +13,9 @@
 
 		    public function prefix_register_query_var($vars){
 				$vars[] = '_fn';
+				$vars[] = '_org';
+				$vars[] = '_type';
+				$vars[] = 'c_paged';
 				return $vars;
 		    }
 
@@ -24,6 +27,8 @@
 		  	public function rewrite(){
 		  		$newrules = array();
 		  		$newrules['fighter/([^/]*)/media-gallery'] = 'index.php?_fn=$matches[1]'; 
+		  		$newrules['organizations/([^/]*)/([^/]*)/([^/]*)'] = 'index.php?_org=$matches[1]&_type=$matches[2]&c_paged=$matches[3]'; 
+		  		$newrules['organizations/([^/]*)/([^/]*)'] = 'index.php?_org=$matches[1]&_type=$matches[2]'; 
 		  		return $newrules;
 		  	}
 
@@ -37,6 +42,8 @@
 
 		  	public function template_include($template){
 		  		$_fn = get_query_var( '_fn' );
+		  		$_org = get_query_var( '_org' );
+		  		$_type = get_query_var( '_type' );
 		  		if(!empty($_fn)){
 		  			$args = array(
 					  'name'        => $_fn,
@@ -55,6 +62,9 @@
 					    }
 					}
 					include_once(get_stylesheet_directory().'/partials/content-fighter-media.php');
+		  			die();
+		  		}elseif(!empty($_org)&&!empty($_type)){
+		  			include_once(get_stylesheet_directory().'/partials/content-page-organizations-'.$_type.'.php');
 		  			die();
 		  		}else{
 			  		return $template;

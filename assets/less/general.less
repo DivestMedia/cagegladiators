@@ -1199,3 +1199,54 @@ section#vip-subscriber{
         }
     }
 }
+
+section#section-organizations,section#section-organizations-news,section#section-organizations-fighters{
+    .nav-container{
+        li.active{
+            a{
+                color: #000 !important;
+            }
+        }
+        li.cur_active{
+            a{
+                color: #e60f0f !important;
+            }
+        }
+    }
+    .box-flip{
+        .box1{
+            background-color: #333;
+            .organization-content{
+                background-color: #111;
+                min-height: 132px;
+                .title{
+                    color: #e60f0f;
+                }
+                label{
+                    color: #fff;
+                }
+            }
+        }
+        .box2{
+            h4{
+                color: #e60f0f;
+            }
+            p{
+                color: #fff;
+            }
+        }
+    }
+    header.tiny-line{
+        &:after{
+            margin: 0!important;
+            padding: 0!important;
+            background: #e60f0f none repeat scroll 0 0;
+            bottom: 0;
+            content: "";
+            display: inline-block;
+            height: 5px;
+            left: 0;
+            width: 70px;
+        }
+    }
+}

@@ -29,6 +29,21 @@ function xyrLoadImg() {
 }
 
 jQuery( function ( $ ) {
+
+    var resizeId;
+    $(window).resize(function() {
+        clearTimeout(resizeId);
+        resizeId = setTimeout(doneResizing, 500);
+    });
+     
+     
+    function doneResizing(){
+        var cur_height = $('#slider-vid-1').parent().siblings().find('img').height();
+        $('#slider-vid-1').css('height',cur_height+'px')
+    }
+
+    window.dispatchEvent(new Event('resize'));
+
     var cur_page = 2;
     if($('.table-event.paginated').length){
         $('.table-event.paginated').each(function() {
@@ -57,9 +72,75 @@ jQuery( function ( $ ) {
         });
     }
 
+
+    if($('.section-organizations-child').length){
+        cur_page = 1;
+        $('.btn-showmorenews').hide().siblings('.progress').show();
+        var cat = $('#section-organizations-news').data('cat');
+        $.ajax({
+            url: "/news/",
+            dataType: 'json',
+            type: 'POST',
+            data: {
+                'action':'getnews',
+                'page':cur_page,
+                'cat':cat
+            },
+            success: function(result){
+                console.log(result);
+                if(result.length<=6&&result.length>0){
+                    cur_page++;
+                    $.each(result,function(i,n){
+                        if(i<3){
+                            var post_url = window.location.origin+'/news/'+n['post-id']+'/'+n['post-name'];
+                            $('#news-row').append('<div class="col-sm-4"><a href="'+post_url+'"><figure style="border-bottom: 5px solid #e60f0f;background-image: url('+n['post-thumbnail']+');background-size: cover;background-repeat: no-repeat;height: 150px;"></figure></a><h4 class="margin-top-20 size-14 weight-700 uppercase height-50" style="overflow:hidden;"><a href="'+post_url+'">'+n['post-title']+'</a></h4><p class="text-justify height-100" style="overflow:hidden;">'+n['post-content']+'</p><ul class="text-left size-12 list-inline list-separator"><li>'+n['published-date']+'</li></ul></div>');
+                        }
+                    });
+
+                    $('.btn-showmorenews').show().siblings('.progress').hide();
+                }else{
+                    $('.btn-showmorenews').hide().siblings('.progress').hide();
+                }
+            },
+            error: function(errorThrown){console.log(errorThrown);}
+        });
+    }
+    if($('#section-organizations-news').length){
+        cur_page = 1;
+        $('.btn-showmorenews').hide().siblings('.progress').show();
+        var cat = $('#section-organizations-news').data('cat');
+        $.ajax({
+            url: "/news/",
+            dataType: 'json',
+            type: 'POST',
+            data: {
+                'action':'getnews',
+                'page':cur_page,
+                'cat':cat
+            },
+            success: function(result){
+                console.log(result);
+                if(result.length<=6&&result.length>0){
+                    cur_page++;
+                    $.each(result,function(i,n){
+                        var post_url = window.location.origin+'/news/'+n['post-id']+'/'+n['post-name'];
+                        $('#news-row').append('<div class="col-sm-4"><a href="'+post_url+'"><figure style="border-bottom: 5px solid #e60f0f;background-image: url('+n['post-thumbnail']+');background-size: cover;background-repeat: no-repeat;height: 150px;"></figure></a><h4 class="margin-top-20 size-14 weight-700 uppercase height-50" style="overflow:hidden;"><a href="'+post_url+'">'+n['post-title']+'</a></h4><p class="text-justify height-100" style="overflow:hidden;">'+n['post-content']+'</p><ul class="text-left size-12 list-inline list-separator"><li>'+n['published-date']+'</li></ul></div>');
+                    });
+
+                    $('.btn-showmorenews').show().siblings('.progress').hide();
+                }else{
+                    $('.btn-showmorenews').hide().siblings('.progress').hide();
+                }
+            },
+            error: function(errorThrown){console.log(errorThrown);}
+        });
+    }
+
     $('.btn-showmorenews').click(function(){
         $(this).hide().siblings('.progress').show();
         var cat = $('.list-group').find('.active').data('cat');
+        if(typeof cat == 'undefined')
+            cat = $('#section-organizations-news').data('cat');
         $.ajax({
             url: "/news/",
             dataType: 'json',
