@@ -146,7 +146,7 @@ data-background="assets/images/boxed_background/1.jpg"
 				AVAILABLE CLASSES:
 				submenu-dark = dark sub menu
 			-->
-			<div class="navbar-collapse pull-right nav-main-collapse collapse">
+			<div class="navbar-collapse pull-right nav-main-collapse collapse submenu-dark">
 				<nav class="nav-main">
 					<?php
 
