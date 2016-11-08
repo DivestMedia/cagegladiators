@@ -84,7 +84,8 @@ get_header();
                 <header class="text-center margin-bottom-50 tiny-line">
                     <h2 class="font-proxima uppercase"><?=$_org?> Fighters</h2>
                 </header>
-                <div class="row">
+                <div class="fighter_container">
+                    <div class="row inline-page page-1" data-page="1">
                 <?php
                     if(!empty($fighters)){
                         foreach ($fighters as $fighter) {
@@ -107,7 +108,7 @@ get_header();
                                 </a>
                                 <div class="fighter-details">
                                     <a href="<?=get_permalink($fighter->ID)?>"><h4 class="margin-bottom-0"><?=$fighter->post_title?></h4></a>
-                                    <a href="<?=site_url('/fighters/'.$f_weight_class_slug)?>"><small class="block lbl-weightclass"><?=$f_weight_class?></small></a>
+                                    <a href="#"><small class="block lbl-weightclass"><?=$f_weight_class?></small></a>
                                     <small><?=$record?></small>
                                 </div>
                             </div>
@@ -121,8 +122,9 @@ get_header();
                 <?php
                     }
                 ?>
+                    </div>
                 </div>
-                <div class="pagination block">
+                <!-- <div class="pagination block">
                 <?php 
                     $currentpage  = get_query_var('c_paged') ?: 1;
                     $_rtotal = get_term_by('slug', $_org, 'post_tag');
@@ -157,6 +159,12 @@ get_header();
                         }
                     }
                 ?>
+                </div> -->
+                <div class="progress progress-bar-container" style="display: none;">
+                    <div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                        <div><strong>Loading more fighters...</strong></div>
+                        <span class="sr-only">80% Complete</span>
+                    </div>
                 </div>
             </div>
         </div>

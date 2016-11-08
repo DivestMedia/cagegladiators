@@ -403,9 +403,6 @@ function blockusers_init() {
     }
 }
 
-
-
-
 add_action( 'wp_ajax_nopriv_save_user_preferences', 'save_user_preferences');
 add_action( 'wp_ajax_save_user_preferences', 'save_user_preferences' );
 
@@ -414,4 +411,69 @@ function save_user_preferences(){
     if(!empty($tags) && is_user_logged_in()){
         update_user_meta( get_current_user_id(), 'preferred_news', $tags);
     }
+}
+
+add_action( 'wp_ajax_nopriv_get_fighters', 'get_fighters');
+add_action( 'wp_ajax_get_fighters', 'get_fighters' );
+
+function get_fighters(){
+    if(!empty($_POST['action'])&&!strcasecmp($_POST['action'], 'get_fighters')){
+        $_limit = !empty($_POST['limit'])?$_POST['limit']:12;
+        $fighters = get_posts([
+            'posts_per_page'   => $_limit,
+            'paged'             => $_POST['page'] ?: 1,
+            'orderby'          => 'title',
+            'order'            => 'ASC',
+            'post_type'        => 'fighter',
+            'post_status'      => 'publish',
+            'tag'              => strtoupper($_POST['cat']),
+            'tax_query' => array(
+                array(
+                    'taxonomy' => 'fighters',
+                    'field' => 'slug',
+                    'operator' => 'EXISTS'
+                )
+            ),
+            'meta_query' => array(
+                'relation' => 'OR',
+                array(
+                    'key' => '_is_featured',
+                    'value' => '0',
+                ),
+                array(
+                    'key' => '_is_featured',
+                    'compare' => 'NOT EXISTS'
+                ),
+            ),
+            'suppress_filters' => true
+        ]);
+
+        $_f_fighters = [];
+
+        if(!empty($fighters)){
+            foreach ($fighters as $key => $fighter) {
+                $_t_fighters = [];
+                $_r_win = get_post_meta( $fighter->ID, '_uf_win', true );
+                $_r_loss = get_post_meta( $fighter->ID, '_uf_loss', true );
+                $_r_draw = get_post_meta( $fighter->ID, '_uf_draw', true );
+                $record = $_r_win.'-'.$_r_loss.'-'.$_r_draw;
+                $_r_fighter_terms = get_the_terms($fighter->ID,'fighters');
+                $f_weight_class_slug = '';
+                if(!empty($_r_fighter_terms[0])){
+                    $f_weight_class = $_r_fighter_terms[0]->name;
+                    $f_weight_class_slug = $_r_fighter_terms[0]->slug;
+                }
+                $_t_fighters['id'] = $fighter->ID;
+                $_t_fighters['link'] = get_permalink($fighter->ID);
+                $_t_fighters['title'] = $fighter->post_title;
+                $_t_fighters['weight'] = $f_weight_class;
+                $_t_fighters['weight_link'] = site_url('/fighters/'.$f_weight_class_slug);
+                $_t_fighters['record'] = $record;
+                $_t_fighters['thumbnail'] = wp_get_attachment_image_src(get_post_thumbnail_id($fighter->ID),'full')[0];
+                array_push($_f_fighters, $_t_fighters);
+            }
+        }
+        echo json_encode($_f_fighters);
+    }
+    die();
 }

@@ -31,11 +31,78 @@ function xyrLoadImg() {
 jQuery( function ( $ ) {
 
     var resizeId;
+    var isloading = 0;
     $(window).resize(function() {
         clearTimeout(resizeId);
         resizeId = setTimeout(doneResizing, 500);
     });
-     
+
+    if($('#section-organizations-fighters').length){
+        var page = 2;
+        var limit = 12;
+        var old_page = 1;
+        var cat = $('#section-organizations-fighters').data('cat');
+        var base_path = '/organizations/'+cat+'/fighters/';
+        window.history.pushState("", "", base_path);
+        
+        $(window).scroll(function(){
+            var window_top = $(window).scrollTop();
+            var window_bottom = window_top + $(window).height();
+            var f_container_top = $('#section-organizations-fighters').offset().top;
+            var f_container_bottom = f_container_top + parseInt($('#section-organizations-fighters').css('height').replace('px',''));
+            get_current_page(window_top,window_bottom);
+            if(window_bottom>=f_container_bottom&&isloading==0){
+                $('.progress-bar-container').show();
+                isloading = 1;
+                $.ajax({
+                    url: window.location.origin+'/wp-admin/admin-ajax.php',
+                    dataType: 'json',
+                    type: 'POST',
+                    data: {
+                        'action':'get_fighters',
+                        'page':page,
+                        'limit':limit,
+                        'cat':cat
+                    },
+                    success: function(result){
+                        current_path = base_path+page+'/';
+                        if(result.length){
+                            $('.fighter_container').append('<div class="row inline-page page-'+page+'" data-page="'+page+'"></div>');
+                            var new_container = $('.fighter_container').find('.page-'+page);
+                            $.each(result,function(i,f){
+                                 new_container.append('<div class="col-sm-6 col-md-4 container-fighters"><a href="'+f.link+'"><div class="thumbnail nopadding-bottom margin-bottom-0 noradius"><img class="img-responsive noradius" src="'+f.thumbnail+'" alt="'+f.title+'" /></div></a><div class="fighter-details"><a href="'+f.link+'"><h4 class="margin-bottom-0">'+f.title+'</h4></a><a href="#"><small class="block lbl-weightclass">'+f.weight+'</small></a><small>'+f.record+'</small></div></div>');
+                            });
+                             window.history.pushState("", "", current_path);
+                            page += 1;
+                            if(result.length==limit)
+                                isloading=0;
+                            $('.progress-bar-container').hide();
+                        }else{
+                            $('.progress-bar-container').hide();
+                        }
+                      
+                    },
+                    error: function(errorThrown){console.log(errorThrown);}
+                });
+            }
+        });
+
+        function get_current_page(window_top,window_bottom){
+            $('.fighter_container').find('.inline-page').each(function(){
+                var current_top = $(this).offset().top;
+                var current_center = current_top+$(window).height()/2;
+                if(window_top<=current_center&&window_bottom>=current_center){
+                    var new_page = $(this).data('page');
+                    if(old_page!=new_page){
+                        window.history.pushState("", "", base_path+new_page+'/');
+                        old_page=new_page;
+                    }
+                }
+            });   
+        }
+    }
+
+
      
     function doneResizing(){
         var cur_height = $('#slider-vid-1').parent().siblings().find('img').height();
