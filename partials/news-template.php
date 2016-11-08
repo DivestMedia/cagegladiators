@@ -81,7 +81,8 @@ if(!empty($_all_news)){
 		</header>
 
 		<div class="row">
-			<div class="col-md-3 col-sm-3">
+			<div class="col-md-3 col-sm-3 hidden-xs">
+				<?php dynamic_sidebar('sidebar-ads')?>
 			</div>
 			<div class="col-md-8 col-sm-9 text-justify ">
 				<div class="post-content">
