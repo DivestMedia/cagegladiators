@@ -12,10 +12,11 @@ $args = array(
 
 $children = get_children( $args );
 
+$page = get_query_var('c_paged') ?: 1;
 
 $fighters = get_posts([
     'posts_per_page'   => $_limit,
-    'paged'             => get_query_var('c_paged') ?: 1,
+    'paged'            => $page,
     'orderby'          => 'title',
     'order'            => 'ASC',
     'post_type'        => 'fighter',
@@ -84,10 +85,13 @@ get_header();
                 <header class="text-center margin-bottom-50 tiny-line">
                     <h2 class="font-proxima uppercase"><?=$_org?> Fighters</h2>
                 </header>
-                <div class="fighter_container">
-                    <div class="row inline-page page-1" data-page="1">
+                <div class="fighter_container <?=$page==1?'infinite-scroll-custom':''?>" data-nextselector="#inf-load-next-fighter" data-itemselector=".inline-page">
+                    
                 <?php
                     if(!empty($fighters)){
+                        ?>
+                        <div class="row inline-page page-<?=$page?>" data-page="<?=$page?>">
+                        <?php
                         foreach ($fighters as $fighter) {
                             $_r_win = get_post_meta( $fighter->ID, '_uf_win', true );
                             $_r_loss = get_post_meta( $fighter->ID, '_uf_loss', true );
@@ -114,17 +118,21 @@ get_header();
                             </div>
                 <?php
                         }
-                    }else{
                 ?>
-                        <div class="margin-bottom-30 text-center">
-                             <h2 class="text-gray">No fighter available</h2>
-                        </div>
+                    </div>
+
                 <?php
                     }
                 ?>
-                    </div>
+                        
+                     <?php if(empty($fighters)){?>
+                        <div class="margin-bottom-30 text-center">
+                             <h2 class="text-gray">No fighter available</h2>
+                        </div>
+                    <?php }?>
                 </div>
-                <!-- <div class="pagination block">
+                <?php if($page!=1){?>
+                <div class="pagination block">
                 <?php 
                     $currentpage  = get_query_var('c_paged') ?: 1;
                     $_rtotal = get_term_by('slug', $_org, 'post_tag');
@@ -146,10 +154,10 @@ get_header();
                             echo '<ul class="pagination">';
                             foreach ($pages as $i => $page) {
                                 if ($currentpage == 1 && $i == 0) {
-                                    echo "<li class='active'>$page</li>";
+                                    echo "<li>$page</li>";
                                 } else {
                                     if ($currentpage != 1 && $currentpage == $i) {
-                                        echo "<li class='active'>$page</li>";
+                                        echo "<li>$page</li>";
                                     } else {
                                         echo "<li>$page</li>";
                                     }
@@ -159,16 +167,22 @@ get_header();
                         }
                     }
                 ?>
-                </div> -->
-                <div class="progress progress-bar-container" style="display: none;">
+                </div>
+                <?php }?>
+                <!-- <div class="progress progress-bar-container" style="display: none;">
                     <div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                         <div><strong>Loading more fighters...</strong></div>
                         <span class="sr-only">80% Complete</span>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
 </section>
+<div id="inf-load-next-fighter" class="center" style="display: none;">
+    <a href="<?=site_url('/organizations/'.$_org.'/fighters/')?>2" class="btn btn-3d btn-xlg btn-dirtygreen block size-25 weight-300 font-lato nomargin noradius">
+        load more...
+    </a>
+</div>
 <?php
 get_footer();

@@ -27,7 +27,7 @@
 		  	public function rewrite(){
 		  		$newrules = array();
 		  		$newrules['fighter/([^/]*)/media-gallery'] = 'index.php?_fn=$matches[1]'; 
-		  		// $newrules['organizations/([^/]*)/([^/]*)/([^/]*)'] = 'index.php?_org=$matches[1]&_type=$matches[2]&c_paged=$matches[3]'; 
+		  		$newrules['organizations/([^/]*)/([^/]*)/([^/]*)'] = 'index.php?_org=$matches[1]&_type=$matches[2]&c_paged=$matches[3]'; 
 		  		$newrules['organizations/([^/]*)/([^/]*)'] = 'index.php?_org=$matches[1]&_type=$matches[2]'; 
 		  		return $newrules;
 		  	}
