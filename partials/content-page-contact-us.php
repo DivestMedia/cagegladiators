@@ -127,7 +127,7 @@
 
 			<h2>Visit Us</h2>
 
-			<p>
+			<!-- <p>
 				<span class="block"><strong><i class="fa fa-map-marker"></i> Address:</strong> 2698 General J. Cailles St., Makati, 1233 Philippines</span>
 				<span class="block"><strong><i class="fa fa-envelope"></i> Email:</strong> <a href="mailto:helpme@divestmedia.com">helpme@divestmedia.com</a></span>
 			</p>
@@ -141,17 +141,18 @@
 					<strong><i class="fa fa-phone"></i> Phone:</strong>
 					<a href="tel:+852 8192 6788">+852 8192 6788</a>
 				</span>
-			</p>
+			</p> -->
 			<h4 class="font300">Manila Office</h4>
 			<p>
 				<span class="block">
 					<strong><i class="fa fa-envelope"></i> Address:</strong>
 					Fort Legend Tower, 3rd Ave and 31st Street, Bonifacio Global City, Taguig, Philippines
 				</span>
-				<span class="block">
+				<!-- <span class="block">
 					<strong><i class="fa fa-phone"></i> Phone:</strong>
 					<a href="tel:+63 917 887 8376">+63 917 887 8376</a>
-				</span>
+				</span> -->
+				<span class="block"><strong><i class="fa fa-envelope"></i> Email:</strong> <a href="mailto:support@divestmedia.com">support@divestmedia.com</a></span>
 			</p>
 			<hr />
 
@@ -201,7 +202,7 @@
 </section>
 <script>
       function initMap() {
-        var myLatLng = {lat: 14.541386, lng: 121.014309};
+        var myLatLng = {lat: 14.5540263, lng: 121.0468529};
 		 var styledMapType = new google.maps.StyledMapType(
 		 [
 		  {
@@ -384,7 +385,7 @@
                     'styled_map']
           }
         });
-         var image = 'http://beta.cagegladiators.com/wp-content/themes/cagegladiators/assets/img/map-cage-pin.png';
+         var image = 'http://www.cagegladiators.com/wp-content/themes/cagegladiators/assets/img/map-cage-pin.png';
         var marker = new google.maps.Marker({
           position: myLatLng,
           map: map,
