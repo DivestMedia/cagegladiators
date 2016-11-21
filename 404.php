@@ -47,7 +47,7 @@ get_header();
 
 							<!-- INLINE SEARCH -->
 							<div class="inline-search clearfix margin-bottom-60">
-								<form action="<? bloginfo('home');?>" method="get" class="widget_search">
+								<form action="<?=site_url();?>" method="get" class="widget_search">
 									<input type="search" placeholder="Search..." id="s" name="s" class="serch-input">
 									<button type="submit">
 										<i class="fa fa-search"></i>

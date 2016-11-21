@@ -91,7 +91,7 @@
     <div class="fighter-background-image"></div>
     <?php if(!empty($vid_id)){?>
     <div class="overlay dark-2"><!-- dark overlay [0 to 9 opacity] --></div>
-    <a id="YTPlayer" class="player" data-property="{videoURL:'http://www.youtube.com/watch?v=<?=$vid_id?>',containment:'#main-featured-fighter',autoPlay:true, mute:true, startAt:5, stopAt:20, opacity:1, loop:1, showControls:false}">youtube</a>
+    <a id="YTPlayer" class="player" data-property="{videoURL:'http://www.youtube.com/watch?v=<?=$vid_id?>',containment:'#main-featured-fighter',autoPlay:true, mute:true, startAt:0, stopAt:30, opacity:1, loop:1, showControls:false}">youtube</a>
     <?php }?>
     <div class="ff-bg-red"></div>
     <div class="ff-bg-gray">
@@ -433,7 +433,7 @@
                                     $result = '<span class="label label-default">NA</span>';
                                 }
                         ?>
-                                <tr>
+                                <tr data-id="<?=$event->ID?>">
                                     <td><?=get_the_title($event->ID)?></td>
                                     <td><?=get_post_meta($event->ID,'_ed_date',true)?></td>
                                     <td><a href="<?=get_permalink($opponentid)?>"><?=$opponent?></a></td>
