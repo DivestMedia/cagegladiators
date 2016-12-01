@@ -56,10 +56,10 @@
     }
 
     $fighter_videos = get_post_meta( $post->ID, '_uf_video', true );
+
     if(!empty($fighter_videos)){
         $fighter_videos = explode(',', $fighter_videos);
     }
-
     // $featuredVideo = get_posts([
     //     'post_type'   => 'iod_video',
     //     'post_status' => 'publish',
@@ -75,8 +75,26 @@
     //     ),
     //     'exclude' => []
     // ]);
-    if(!empty($fighter_videos[0])){
-        $video = $fighter_videos[0];
+    $fight_footage = [];
+    $profile_vid = $fighter_videos;
+    if(!empty($profile_vid)){
+        if(count($profile_vid)>1){
+            $fight_footage = array_pop($profile_vid);
+        }
+
+        // $video = $fighter_videos[0];
+        // $iod_video = json_decode(get_post_meta( $video, '_iod_video',true))->embed->url;
+        // $ytpattern = '/^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/';
+        // if(preg_match($ytpattern,$iod_video,$vid_id)){
+        //     $vid_id = end($vid_id);
+        //     $iod_video_thumbnail = 'http://img.youtube.com/vi/'.$vid_id.'/mqdefault.jpg';
+        // }else{
+        //     $iod_video_thumbnail = 'http://www.askgamblers.com/uploads/original/isoftbet-2-5474883270a0f81c4b8b456b.png';
+        // };
+    }
+    $vid_id = 0;
+    if(!empty($fight_footage)){
+        $video = $fight_footage;
         $iod_video = json_decode(get_post_meta( $video, '_iod_video',true))->embed->url;
         $ytpattern = '/^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/';
         if(preg_match($ytpattern,$iod_video,$vid_id)){
@@ -132,8 +150,23 @@
                 </div>
             </div>
             <div class="col-md-9">
-            <?php if(!empty($vid_id)){?>
-                <div id="sec-profile-vid" class="fighter-details-block fighter-videos row">
+            <?php 
+                if(!empty($profile_vid)){
+                    ?>
+                        <div id="sec-profile-vid" class="fighter-details-block fighter-videos row">
+                    <?php
+                    foreach ($profile_vid as $key => $pv) {
+                         $video = $pv;
+                        $iod_video = json_decode(get_post_meta( $video, '_iod_video',true))->embed->url;
+                        $ytpattern = '/^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/';
+                        if(preg_match($ytpattern,$iod_video,$vid_id)){
+                            $vid_id = end($vid_id);
+                            $iod_video_thumbnail = 'http://img.youtube.com/vi/'.$vid_id.'/mqdefault.jpg';
+                        }else{
+                            $iod_video_thumbnail = 'http://www.askgamblers.com/uploads/original/isoftbet-2-5474883270a0f81c4b8b456b.png';
+                        };
+            ?>
+                
                     <div class="col-sm-6">
                         <div class="embed-responsive embed-responsive-16by9" style="border-bottom: 5px solid #ce0505;">
                             <a class="embed-responsive-item main-box lightbox" href="https://www.youtube.com/watch?v=<?=$vid_id?>" data-plugin-options='{"type":"iframe"}'>
@@ -144,7 +177,9 @@
                             </a>
                         </div>
                     </div>
+                <?php }?>
                 </div>
+
                 <?php }?>
                 <div id="sec-profile" class="fighter-details-block fighter-stats row">
                     <!-- H3 -->
@@ -281,7 +316,45 @@
                 <div id="sec-fight-footage" class="fighter-details-block fighter-videos row">
                     <div class="col-md-12">
                         <h3 class="header-red">Fight Footage</h3>
+                            <?php
+                                $vid_id = 0;
+                                if(!empty($fight_footage)){
+                                    $video = $fight_footage;
+                                    $iod_video = json_decode(get_post_meta( $video, '_iod_video',true))->embed->url;
+                                    $ytpattern = '/^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/';
+                                    if(preg_match($ytpattern,$iod_video,$vid_id)){
+                                        $vid_id = end($vid_id);
+                                        $iod_video_thumbnail = 'http://img.youtube.com/vi/'.$vid_id.'/mqdefault.jpg';
+                                    }else{
+                                        $iod_video_thumbnail = 'http://www.askgamblers.com/uploads/original/isoftbet-2-5474883270a0f81c4b8b456b.png';
+                                    };
+                                }
+                            ?>
+                            <?php if(!empty($vid_id)){?>
                         <div class="row">
+                            
+                            <div id="sec-profile-vid" class="fighter-details-block fighter-videos row">
+                                <div class="col-sm-6">
+                                    <div class="embed-responsive embed-responsive-16by9" style="border-bottom: 5px solid #ce0505;">
+                                        <a class="embed-responsive-item main-box lightbox" href="https://www.youtube.com/watch?v=<?=$vid_id?>" data-plugin-options='{"type":"iframe"}'>
+                                            <span class="image-hover-icon image-hover-dark">
+                                                <i class="fa fa-play-circle"></i>
+                                            </span>
+                                            <img src="http://i3.ytimg.com/vi/<?=$vid_id?>/maxresdefault.jpg" alt="..." class="img-responsive">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                                </div>
+
+                            <?php }else{
+                                ?>
+                        <div class="text-center">
+                            <h2 class="text-gray">Coming Soon</h2>
+                        </div>
+                                <?php
+
+                                }?>
                             <!-- <div class="col-sm-4">
                                 <div class="item-box">
                                     <figure>
@@ -358,10 +431,7 @@
                                     </div>
                                 </div>
                             </div> -->
-                        </div>
-                        <div class="text-center">
-                            <h2 class="text-gray">Coming Soon</h2>
-                        </div>
+                        
                     </div>
                 </div>
                 <div id="sec-road-to-glory" class="fighter-details-block fighter-gallery row">

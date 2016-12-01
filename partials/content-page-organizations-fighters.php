@@ -12,36 +12,130 @@ $args = array(
 
 $children = get_children( $args );
 
-$page = get_query_var('c_paged') ?: 1;
 
-$fighters = get_posts([
-    'posts_per_page'   => $_limit,
-    'paged'            => $page,
-    'orderby'          => 'title',
-    'order'            => 'ASC',
-    'post_type'        => 'fighter',
-    'post_status'      => 'publish',
-    'tag'              => strtoupper($_org),
-    'tax_query' => array(
+
+$page = get_query_var('c_paged') ?: 1;
+$cat = !empty($f_cat)?$f_cat:'';
+
+
+// echo '<pre>';
+// var_dump($page);
+// print_r(get_terms(
+//     array(
+//         'taxonomy' => 'fighters',
+//         'name' => $page,
+//     ) ) );
+// echo '</pre>';
+$is_infinite = false;
+
+if(ctype_alpha($page)){
+    $page = strtolower($page);
+    $fighters = get_posts([
+        'posts_per_page'   => $_limit,
+        'paged'             => 1,
+        'orderby'          => 'title',
+        'order'            => 'ASC',
+        'post_type'        => 'fighter',
+        'post_status'      => 'publish',
+        'tax_query' => array(
+            array(
+                'taxonomy' => 'fighters',
+                'field' => 'slug',
+                'terms' => $page,
+            )
+        ),
+        'meta_query' => array(
+            'relation' => 'OR',
+            array(
+                'key' => '_is_featured',
+                'value' => '0',
+            ),
+            array(
+                'key' => '_is_featured',
+                'compare' => 'NOT EXISTS'
+            ),
+        ),
+        'suppress_filters' => true
+    ]);
+    $_rtotal = get_terms(
         array(
             'taxonomy' => 'fighters',
-            'field' => 'slug',
-            'operator' => 'EXISTS'
-        )
-    ),
-    'meta_query' => array(
-        'relation' => 'OR',
-        array(
-            'key' => '_is_featured',
-            'value' => '0',
+            'name' => $page,
+        ));
+    $_rtotal = !empty($_rtotal[0])?$_rtotal[0]:'';
+    $base ='/organizations/'.$_org.'/fighters/'.$page.'/%_%';
+    $page = 1;
+}elseif(!empty($cat)){
+    $cat = strtolower($cat);
+    $fighters = get_posts([
+        'posts_per_page'   => $_limit,
+        'paged'             => $page,
+        'orderby'          => 'title',
+        'order'            => 'ASC',
+        'post_type'        => 'fighter',
+        'post_status'      => 'publish',
+        'tax_query' => array(
+            array(
+                'taxonomy' => 'fighters',
+                'field' => 'slug',
+                'terms' => $cat,
+            )
         ),
-        array(
-            'key' => '_is_featured',
-            'compare' => 'NOT EXISTS'
+        'meta_query' => array(
+            'relation' => 'OR',
+            array(
+                'key' => '_is_featured',
+                'value' => '0',
+            ),
+            array(
+                'key' => '_is_featured',
+                'compare' => 'NOT EXISTS'
+            ),
         ),
-    ),
-    'suppress_filters' => true
-]);
+        'suppress_filters' => true
+    ]);
+     $_rtotal = get_terms(
+        array(
+            'taxonomy' => 'fighters',
+            'name' => $cat,
+        ));
+     $_rtotal = !empty($_rtotal[0])?$_rtotal[0]:'';
+     $base ='/organizations/'.$_org.'/fighters/'.$cat.'/%_%';
+}else{
+    $fighters = get_posts([
+        'posts_per_page'   => $_limit,
+        'paged'            => $page,
+        'orderby'          => 'title',
+        'order'            => 'ASC',
+        'post_type'        => 'fighter',
+        'post_status'      => 'publish',
+        'tag'              => strtoupper($_org),
+        'tax_query' => array(
+            array(
+                'taxonomy' => 'fighters',
+                'field' => 'slug',
+                'operator' => 'EXISTS'
+            )
+        ),
+        'meta_query' => array(
+            'relation' => 'OR',
+            array(
+                'key' => '_is_featured',
+                'value' => '0',
+            ),
+            array(
+                'key' => '_is_featured',
+                'compare' => 'NOT EXISTS'
+            ),
+        ),
+        'suppress_filters' => true
+    ]);
+     $_rtotal = get_term_by('slug', $_org, 'post_tag');
+     $base ='/organizations/'.$_org.'/fighters/%_%';
+     if($page == 1)
+        $is_infinite = true;
+}
+
 
 get_header();
 
@@ -85,8 +179,7 @@ get_header();
                 <header class="text-center margin-bottom-50 tiny-line">
                     <h2 class="font-proxima uppercase"><?=$_org?> Fighters</h2>
                 </header>
-                <div class="fighter_container <?=$page==1?'infinite-scroll-custom':''?>" data-nextselector="#inf-load-next-fighter" data-itemselector=".inline-page">
-                    
+                <div class="fighter_container <?=$is_infinite?'infinite-scroll-custom':''?>" data-nextselector="#inf-load-next-fighter" data-itemselector=".inline-page">
                 <?php
                     if(!empty($fighters)){
                         ?>
@@ -104,7 +197,7 @@ get_header();
                                 $f_weight_class_slug = $_r_fighter_terms[0]->slug;
                             }
                 ?>  
-                            <div class="col-sm-6 col-md-4 container-fighters">
+                            <div class="col-sm-6 col-md-4 container-fighters <?=strtolower($f_weight_class)?>">
                                 <a href="<?=get_permalink($fighter->ID)?>">
                                     <div class="thumbnail nopadding-bottom margin-bottom-0 noradius">
                                         <img class="img-responsive noradius" src="<?=wp_get_attachment_image_src(get_post_thumbnail_id($fighter->ID),'full')[0]?>" alt="" />
@@ -112,7 +205,7 @@ get_header();
                                 </a>
                                 <div class="fighter-details">
                                     <a href="<?=get_permalink($fighter->ID)?>"><h4 class="margin-bottom-0"><?=$fighter->post_title?></h4></a>
-                                    <a href="#"><small class="block lbl-weightclass"><?=$f_weight_class?></small></a>
+                                    <a href="<?=site_url('/organizations/'.$_org.'/fighters/'.strtolower($f_weight_class))?>"><small class="block lbl-weightclass"><?=$f_weight_class?></small></a>
                                     <small><?=$record?></small>
                                 </div>
                             </div>
@@ -131,15 +224,14 @@ get_header();
                         </div>
                     <?php }?>
                 </div>
-                <?php if($page!=1){?>
+                <?php if(!$is_infinite){?>
                 <div class="pagination block">
                 <?php 
-                    $currentpage  = get_query_var('c_paged') ?: 1;
-                    $_rtotal = get_term_by('slug', $_org, 'post_tag');
+                    $currentpage  = $page;
                     if(!empty($_rtotal->count)){
                         $_rtotal = ceil($_rtotal->count/$_limit);
                         $pages = paginate_links(array(
-                         'base'               => '/organizations/'.$_org.'/fighters/%_%',
+                         'base'               => $base,
                          'format'             => '%#%',
                          'total'              => $_rtotal,
                          'current'            =>  $currentpage,

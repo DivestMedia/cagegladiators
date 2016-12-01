@@ -19,6 +19,20 @@
 							<a href="/fighter/glen-ranillo/" class="btn btn-sm uppercase btn-black noradius">View Profile</a>
 						</div>
 				</div>
+				<div class="figher-item">
+					<img src="<?=site_url('/wp-content/uploads/2016/11/main-featured-fighter-4.png')?>" class="img-responsive"/>
+						<div class="fighter-profile">
+							<p class="text-white size-13">Eric was born on April 30, 1982, in Baguio, in the mountain province of Benguet, on the island of Luzon, this is where most of the good fighters come from, it’s practically in the genes up there. </p>
+							<a href="/fighter/eric-kelly/" class="btn btn-sm uppercase btn-black noradius">View Profile</a>
+						</div>
+				</div>
+				<div class="figher-item">
+					<img src="<?=site_url('/wp-content/uploads/2016/11/main-featured-fighter-5.png')?>" class="img-responsive"/>
+						<div class="fighter-profile">
+							<p class="text-white size-13">There are two Kelly brothers, both good fighters; Edward Kelly is the calmer one of the pair, or at least until he gets in the cage. Maybe it’s part of his proud Igorot spirit, something both brothers cherish.</p>
+							<a href="/fighter/edward-kelly/" class="btn btn-sm uppercase btn-black noradius">View Profile</a>
+						</div>
+				</div>
 			</div>
 		</div>
 	</div>

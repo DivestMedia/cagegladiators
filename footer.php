@@ -71,7 +71,7 @@
 
 
 <!-- PRELOADER -->
-<div id="preloaderx">
+<div id="preloader">
 	<div class="inner">
 		<span class="loader"></span>
 	</div>
