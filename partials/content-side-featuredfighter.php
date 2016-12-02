@@ -1,23 +1,24 @@
 <?php
-$featuredFighter = get_posts([
-	'posts_per_page' => 1,
-	'paged' => 1,
-	'post_type' => [
-		'fighter'
-	],
-	'meta_key' => '_is_featured',
-	'orderby' => '_is_featured',
-	'order' => 'DESC',
-	'meta_query' => [
-		[
-			'key' => '_is_featured',
-			'compare' => 'LIKE',
-		]
-	],
-	'post_status'      => 'publish',
-	]) ?: [];
+	$featuredFighter = [];
+// $featuredFighter = get_posts([
+// 	'posts_per_page' => 1,
+// 	'paged' => 1,
+// 	'post_type' => [
+// 		'fighter'
+// 	],
+// 	'meta_key' => '_is_featured',
+// 	'orderby' => '_is_featured',
+// 	'order' => 'DESC',
+// 	'meta_query' => [
+// 		[
+// 			'key' => '_is_featured',
+// 			'compare' => 'LIKE',
+// 		]
+// 	],
+// 	'post_status'      => 'publish',
+// 	]) ?: [];
 	?>
-	<?php if(count($featuredFighter)): ?>
+	<?php if(!empty($featuredFighter)): ?>
 		<?php foreach ($featuredFighter as $key => $fighter):
 			$imagesrc = '';
 			$sideview = get_post_meta($fighter->ID,'_uf_image_right',true) ?: false;
@@ -41,6 +42,12 @@ $featuredFighter = get_posts([
 			</div>
 		<?php endforeach; ?>
 	<?php endif; ?>
+
+	<div class="content-side-featuredfighter col-md-12 col-sm-6" style="padding: 0;">
+		<figure>
+			<a href="/fighter/brandon-vera/"><img class="img-responsive" src="/wp-content/uploads/2016/12/feature_vera.jpg" alt="" /></a>
+		</figure>
+	</div>
 
 	<?php
 	$fatAss2BadAsses = get_posts([

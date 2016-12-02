@@ -443,7 +443,7 @@
                                 'posts_per_page'   => -1,
                                 'meta_key'          => '_ed_date',
                                 'orderby'          => 'meta_value_datetime',
-                                'order'            => 'ASC',
+                                'order'            => 'DESC',
                                 'post_type'        => 'events',
                                 'post_status'      => 'publish',
                                 'meta_query' => array(
@@ -477,7 +477,7 @@
                         <?php
                             foreach ($events as $event) {
                                 $result = get_post_meta($event->ID,'_ed_result',true);
-                                $span_color = ['draw'=>'info','loss'=>'danger','win'=>'success','na'=>'default'];
+                                $span_color = ['draw'=>'info','loss'=>'danger','win'=>'success','no contest'=>'primary','na'=>'default'];
                                 
                                 $location = get_post_meta($event->ID,'_ed_location',true);
                                 $decision = get_post_meta($event->ID,'_ed_decision',true);

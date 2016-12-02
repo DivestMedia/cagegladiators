@@ -89,6 +89,14 @@ jQuery( function ( $ ) {
         resizeId = setTimeout(doneResizing, 500);
     });
 
+    $('.cc-watch-now-container').click(function(){
+        var desc = $(this).parent().find('.video-description').html();
+        setTimeout(function(){
+            var vid_height = $('body').find('.mfp-content').css('height');
+            $('body').find('.mfp-container').append('<div class="cc-desc-container">'+desc+'</div>').css('height',vid_height);
+        },1000);
+    });
+
     if($('#section-organizations-fighters').length){
         var page = 2;
         var limit = 12;

@@ -16,6 +16,14 @@
     }
 }
 
+.cc-desc-container{
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 10px;
+    background: #121212;
+    color: #fff;
+}
+
 #custom-search-form{
     input{
         background: #fff;
@@ -508,6 +516,9 @@ section#home-main-container{
                             background-size: cover;
                             background-position: center;
                             background-repeat: no-repeat;
+                            @media (min-width: 0px) and (max-width: 758px){
+                                height: 250px;
+                            }
                         }
                         .other-news-title{
                             margin:10px 0;
@@ -551,6 +562,7 @@ section#home-main-container{
                     padding-left:15px;
                 }
                 .content-fighter{
+                    display: none;
                     background-color: #020202;
                     padding: 5px 0 0px 15px;
                     min-height: 70px;
@@ -565,6 +577,9 @@ section#home-main-container{
                         margin-bottom: 0;
                     }
                 }
+                .video-description{
+                    display: none;
+                }
                 .content-button{
                     padding: 15px 0 0 15px;
                     button{
@@ -572,11 +587,11 @@ section#home-main-container{
                         border-radius: 0;
                     }
                 }
-                img{
-                    position: absolute;
-                    bottom: 0;
-                    right: 10px;
-                }
+                // img{
+                //     position: absolute;
+                //     bottom: 0;
+                //     right: 10px;
+                // }
             }
         }
     }
@@ -614,7 +629,7 @@ section#home-main-container{
             }
 
             figure{
-                height: 250px;
+                height: 100%;
                 background-repeat: no-repeat;
                 &.sideview{
                     background-position: center 15px;
