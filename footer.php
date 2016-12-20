@@ -43,11 +43,11 @@
 					</p>
 				</div>
 				<hr/>
-				<div class="row ">
-					<div class="col-sm-6">
+				<div class="row footer-navcc">
+					<div class="col-md-6 col-sm-12 margin-bottom-10 cont-cc">
 						&copy; 2016 Cage Gladiators. All rights reserved
 					</div>
-					<div class="col-sm-6 text-right">
+					<div class="col-md-6 col-sm-12 margin-bottom-10 cont-nav">
 						<?php
 						if(!empty(wp_get_nav_menu_items('Footer Navigation'))){
 							$footer_menu = [];
@@ -58,6 +58,7 @@
 						print_r(implode(' | ', $footer_menu));
 						?>
 					</div>
+					
 				</div>
 			</div>
 		</footer>

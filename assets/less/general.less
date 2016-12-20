@@ -214,6 +214,48 @@ section#section-media-gallery{
 }
 
 .section-fighters{
+    .featured-figter-container-month{
+        .image-hover-icon{
+            margin:0 15px;
+            cursor: pointer !important;
+            opacity: 1;
+        }
+        .lbl-weightclass{
+            color: #e60f0f;
+        }
+        a{
+            cursor: pointer !important;
+            h4{
+                cursor: pointer !important;
+            }
+        }
+        .container-fighters{
+            padding-bottom:30px;
+            &:hover{
+                .thumbnail{
+                    background-color: #b00;
+                    border-bottom: 5px solid #ce0505;
+                }
+            }
+            .thumbnail{
+                border: none;
+                border-bottom: 5px solid #333333;
+                transition: all 0.7s ease;
+
+                background: #bbb;
+            }
+        }
+        .cc-watch-now-container{
+            img{
+                border-bottom: 5px solid #ce0505;
+            }
+        }
+        .fighter-details{
+            label{
+                margin-bottom: 0;
+            }
+        }
+    }
     .featured-figter-container{
         .section-title{
             span{
@@ -431,10 +473,11 @@ section#home-main-container{
                             color: #e7e7e7;
                             margin-bottom: 0;
                             label{
-                                margin: 0 0 -10px 25px;
+                                margin: 0 0 -10px 0;
                             }
                             h1{
                                 color: #e7e7e7;
+                                line-height: 22px !important;
                             }
                             button{
                                 padding: 5px 10px;
@@ -662,11 +705,25 @@ section#featured-fighter{
             vertical-align: bottom;
             display: inline-block;
             float: none;
+            &.content-left{
+                background: rgba(0,0,0,.5);
+                padding: 10px;
+            }
+            &.content-right{
+                @media (min-width: 0) and (max-width: 768px){
+                    margin-bottom: 0;
+                    width: 100%;
+                    img{
+                        z-index: -1 !important;
+                    }
+                }
+            }
             button{
                 background-color: #ce0505;
                 border-radius: 0;
             }
             .fighter-name{
+                padding-bottom: 85px;
                 h1{
                     font-weight: 900;
                     line-height: 1 !important;
@@ -675,12 +732,12 @@ section#featured-fighter{
                 }
             }
             img.fighter-image{
-                width: 50%;
+                width: 100%;
                 height: auto;
                 position: absolute;
                 bottom: -25px;
                 right: 0;
-                z-index: -1;
+                z-index: 0;
             }
         }
         background-size:cover;
@@ -897,6 +954,16 @@ footer#footer{
     .container{
         background-color: #111111;
     }
+    .footer-navcc{
+        .cont-nav{
+            text-align: right;
+        }
+        @media screen and (max-width: 992px){
+            >div{
+                text-align: center !important;
+            }
+        }
+    }
 }
 section#vip-subscriber{
     background-color: #e60f0f;
@@ -983,14 +1050,22 @@ section#vip-subscriber{
             .fighter-profile{
                 width: 100%;
                 bottom: 0;
-                background: rgba(0,0,0,0.2);
-                padding: 10px;
+                // background: rgba(0,0,0,0.2);
+                padding: 10px 0 10px;
                 p{
                     margin-bottom: 10px;
                     overflow: hidden;
                     width: 80%;
                     float: left;
                     height: 36px;
+                }
+                a{
+                    padding: 0px 4px;
+                    font-size: 12px;
+                    float: right;
+                    background: rgba(0,0,0,.5);
+                    margin-bottom: 4%;
+                    margin-right: 75%;
                 }
             }
         }

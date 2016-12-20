@@ -15,6 +15,7 @@
 				$vars[] = '_fn';
 				$vars[] = '_org';
 				$vars[] = '_type';
+				$vars[] = 'f_cat';
 				$vars[] = 'c_paged';
 				return $vars;
 		    }
@@ -27,6 +28,7 @@
 		  	public function rewrite(){
 		  		$newrules = array();
 		  		$newrules['fighter/([^/]*)/media-gallery'] = 'index.php?_fn=$matches[1]'; 
+		  		$newrules['organizations/([^/]*)/([^/]*)/([^/]*)/([^/]*)'] = 'index.php?_org=$matches[1]&_type=$matches[2]&f_cat=$matches[3]&c_paged=$matches[4]'; 
 		  		$newrules['organizations/([^/]*)/([^/]*)/([^/]*)'] = 'index.php?_org=$matches[1]&_type=$matches[2]&c_paged=$matches[3]'; 
 		  		$newrules['organizations/([^/]*)/([^/]*)'] = 'index.php?_org=$matches[1]&_type=$matches[2]'; 
 		  		return $newrules;
@@ -44,6 +46,7 @@
 		  		$_fn = get_query_var( '_fn' );
 		  		$_org = get_query_var( '_org' );
 		  		$_type = get_query_var( '_type' );
+		  		$f_cat = get_query_var( 'f_cat' );
 		  		if(!empty($_fn)){
 		  			$args = array(
 					  'name'        => $_fn,

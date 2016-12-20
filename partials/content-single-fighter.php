@@ -443,7 +443,7 @@
                                 'posts_per_page'   => -1,
                                 'meta_key'          => '_ed_date',
                                 'orderby'          => 'meta_value_datetime',
-                                'order'            => 'DESC',
+                                'order'            => 'ASC',
                                 'post_type'        => 'events',
                                 'post_status'      => 'publish',
                                 'meta_query' => array(
@@ -461,7 +461,49 @@
                                 ),
                                 'suppress_filters' => true
                             ]);
+                            
+
                             if(!empty($events)){
+                                $gen_events = [];
+                                foreach ($events as $key => $event) {
+
+                                    $edate = get_post_meta($event->ID,'_ed_date',true);
+
+                                    $result = get_post_meta($event->ID,'_ed_result',true);
+                                    $span_color = ['draw'=>'info','loss'=>'danger','win'=>'success','no contest'=>'primary','na'=>'default'];
+                                    
+                                    $location = get_post_meta($event->ID,'_ed_location',true);
+                                    $decision = get_post_meta($event->ID,'_ed_decision',true);
+
+                                    $opponent = get_post_meta($event->ID,'_ed_opponent',true);
+                                    $opponentid = get_post_meta($event->ID,'_ed_opponent_id',true);
+
+                                    if($post->ID==$opponentid){
+                                        $opponent = get_post_meta($event->ID,'_ed_fighter',true);
+                                        $opponentid = get_post_meta($event->ID,'_ed_fighter_id',true);
+                                        if($result=='Win')
+                                            $result='Loss';
+                                        elseif($result=='Loss')
+                                            $result='Win';
+                                    }
+
+                                    if(!empty($result)){
+                                        if(!strcasecmp($result, 'NA'))
+                                            $result = '<span class="label label-'.$span_color[strtolower($result)].'">'.$result.'</span>';
+                                        else
+                                            $result = '<span class="label label-'.$span_color[strtolower($result)].'">'.$result.' | '.$decision.'</span>';
+                                    }else{
+                                        $result = '<span class="label label-default">NA</span>';
+                                    }
+                                    $gen_events[strtotime($edate)] = [
+                                        'title'=>get_the_title($event->ID),
+                                        'date'=>$edate,
+                                        'opponent'=>'<a href="'.get_permalink($opponentid).'">'.$opponent.'</a>',
+                                        'location'=>$location?:'N/A',
+                                        'result'=>$result,
+                                    ];
+                                }
+                                krsort($gen_events);
                         ?>
                                 <table class="table table-hover table-event paginated">
                                     <thead>
@@ -475,40 +517,15 @@
                                     </thead>
                                     <tbody>
                         <?php
-                            foreach ($events as $event) {
-                                $result = get_post_meta($event->ID,'_ed_result',true);
-                                $span_color = ['draw'=>'info','loss'=>'danger','win'=>'success','no contest'=>'primary','na'=>'default'];
+                            foreach ($gen_events as $event) {
                                 
-                                $location = get_post_meta($event->ID,'_ed_location',true);
-                                $decision = get_post_meta($event->ID,'_ed_decision',true);
-
-                                $opponent = get_post_meta($event->ID,'_ed_opponent',true);
-                                $opponentid = get_post_meta($event->ID,'_ed_opponent_id',true);
-
-                                if($post->ID==$opponentid){
-                                    $opponent = get_post_meta($event->ID,'_ed_fighter',true);
-                                    $opponentid = get_post_meta($event->ID,'_ed_fighter_id',true);
-                                    if($result=='Win')
-                                        $result='Loss';
-                                    elseif($result=='Loss')
-                                        $result='Win';
-                                }
-
-                                if(!empty($result)){
-                                    if(!strcasecmp($result, 'NA'))
-                                        $result = '<span class="label label-'.$span_color[strtolower($result)].'">'.$result.'</span>';
-                                    else
-                                        $result = '<span class="label label-'.$span_color[strtolower($result)].'">'.$result.' | '.$decision.'</span>';
-                                }else{
-                                    $result = '<span class="label label-default">NA</span>';
-                                }
                         ?>
                                 <tr data-id="<?=$event->ID?>">
-                                    <td><?=get_the_title($event->ID)?></td>
-                                    <td><?=get_post_meta($event->ID,'_ed_date',true)?></td>
-                                    <td><a href="<?=get_permalink($opponentid)?>"><?=$opponent?></a></td>
-                                    <td><?=$location?:'N/A'?></td>
-                                    <td><?=$result?></td>
+                                    <td><?=$event['title']?></td>
+                                    <td><?=$event['date']?></td>
+                                    <td><?=$event['opponent']?></td>
+                                    <td><?=$event['location']?></td>
+                                    <td><?=$event['result']?></td>
                                 </tr>
                         <?php
                             }
