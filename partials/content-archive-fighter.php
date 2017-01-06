@@ -1,4 +1,4 @@
-f<?php
+<?php
 	$hide_old = 1;
 	$team_cage_fighter = get_posts([
 						'posts_per_page'   => 6,

@@ -45,7 +45,7 @@
 				<hr/>
 				<div class="row footer-navcc">
 					<div class="col-md-6 col-sm-12 margin-bottom-10 cont-cc">
-						&copy; 2016 Cage Gladiators. All rights reserved
+						&copy; <?=date("Y")?> Cage Gladiators. All rights reserved
 					</div>
 					<div class="col-md-6 col-sm-12 margin-bottom-10 cont-nav">
 						<?php
@@ -58,7 +58,7 @@
 						print_r(implode(' | ', $footer_menu));
 						?>
 					</div>
-					
+
 				</div>
 			</div>
 		</footer>
@@ -66,7 +66,7 @@
 		</section>
 	</div>
 	<!-- /wrapper -->
-	
+
 <!-- SCROLL TO TOP -->
 <a href="#" id="toTop"></a>
 
