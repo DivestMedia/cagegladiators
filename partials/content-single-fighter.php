@@ -104,6 +104,9 @@
             $iod_video_thumbnail = 'http://www.askgamblers.com/uploads/original/isoftbet-2-5474883270a0f81c4b8b456b.png';
         };
     }
+    if(!empty($fighter_videos)){
+        $fighter_videos = array_reverse($fighter_videos);
+    }
 ?>
 <section id="main-featured-fighter" class="fighter-solo-section">
     <div class="fighter-background-image"></div>
@@ -151,20 +154,25 @@
             </div>
             <div class="col-md-9">
             <?php 
-                if(!empty($profile_vid)){
+                if(!empty($fighter_videos)){
                     ?>
                         <div id="sec-profile-vid" class="fighter-details-block fighter-videos row">
                     <?php
-                    foreach ($profile_vid as $key => $pv) {
-                         $video = $pv;
-                        $iod_video = json_decode(get_post_meta( $video, '_iod_video',true))->embed->url;
-                        $ytpattern = '/^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/';
-                        if(preg_match($ytpattern,$iod_video,$vid_id)){
-                            $vid_id = end($vid_id);
-                            $iod_video_thumbnail = 'http://img.youtube.com/vi/'.$vid_id.'/mqdefault.jpg';
-                        }else{
-                            $iod_video_thumbnail = 'http://www.askgamblers.com/uploads/original/isoftbet-2-5474883270a0f81c4b8b456b.png';
-                        };
+                    foreach ($fighter_videos as $key => $pv) {
+                        $_terms = get_the_terms($pv,'iod_category');
+                        if(!empty($_terms[0]->name)){
+                            if(!strcasecmp('Profile Videos', $_terms[0]->name)){
+                                $video = $pv;
+                                $iod_video = json_decode(get_post_meta( $video, '_iod_video',true))->embed->url;
+                                $ytpattern = '/^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/';
+                                if(preg_match($ytpattern,$iod_video,$vid_id)){
+                                    $vid_id = end($vid_id);
+                                    $iod_video_thumbnail = 'http://img.youtube.com/vi/'.$vid_id.'/mqdefault.jpg';
+                                }else{
+                                    $iod_video_thumbnail = 'http://www.askgamblers.com/uploads/original/isoftbet-2-5474883270a0f81c4b8b456b.png';
+                                }
+                                // http://i3.ytimg.com/vi/$vid_id/maxresdefault.jpg
+                                $iod_video_thumbnail = get_the_post_thumbnail_url($video,"full");
             ?>
                 
                     <div class="col-sm-6">
@@ -173,11 +181,13 @@
                                 <span class="image-hover-icon image-hover-dark">
                                     <i class="fa fa-play-circle"></i>
                                 </span>
-                                <img src="http://i3.ytimg.com/vi/<?=$vid_id?>/maxresdefault.jpg" alt="..." class="img-responsive">
+                                <img src="<?=$iod_video_thumbnail?>" alt="..." class="img-responsive">
                             </a>
                         </div>
                     </div>
-                <?php }?>
+                <?php }
+                }
+                }?>
                 </div>
 
                 <?php }?>
@@ -317,33 +327,56 @@
                     <div class="col-md-12">
                         <h3 class="header-red">Fight Footage</h3>
                             <?php
-                                $vid_id = 0;
-                                if(!empty($fight_footage)){
-                                    $video = $fight_footage;
-                                    $iod_video = json_decode(get_post_meta( $video, '_iod_video',true))->embed->url;
-                                    $ytpattern = '/^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/';
-                                    if(preg_match($ytpattern,$iod_video,$vid_id)){
-                                        $vid_id = end($vid_id);
-                                        $iod_video_thumbnail = 'http://img.youtube.com/vi/'.$vid_id.'/mqdefault.jpg';
-                                    }else{
-                                        $iod_video_thumbnail = 'http://www.askgamblers.com/uploads/original/isoftbet-2-5474883270a0f81c4b8b456b.png';
-                                    };
-                                }
+                                // $vid_id = 0;
+                                // if(!empty($fight_footage)){
+                                //     $video = $fight_footage;
+                                //     $iod_video = json_decode(get_post_meta( $video, '_iod_video',true))->embed->url;
+                                //     $ytpattern = '/^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/';
+                                //     if(preg_match($ytpattern,$iod_video,$vid_id)){
+                                //         $vid_id = end($vid_id);
+                                //         $iod_video_thumbnail = 'http://img.youtube.com/vi/'.$vid_id.'/mqdefault.jpg';
+                                //     }else{
+                                //         $iod_video_thumbnail = 'http://www.askgamblers.com/uploads/original/isoftbet-2-5474883270a0f81c4b8b456b.png';
+                                //     };
+                                // }
                             ?>
-                            <?php if(!empty($vid_id)){?>
+                            <?php if(!empty($fighter_videos)){?>
                         <div class="row">
                             
                             <div id="sec-profile-vid" class="fighter-details-block fighter-videos row">
+                                <?php
+
+                                    foreach ($fighter_videos as $key => $pv) {
+                                        $_terms = get_the_terms($pv,'iod_category');
+                                        if(!empty($_terms[0]->name)){
+                                            if(!strcasecmp('Fight Footage', $_terms[0]->name)){
+                                                $video = $pv;
+                                                $iod_video = json_decode(get_post_meta( $video, '_iod_video',true))->embed->url;
+                                                $ytpattern = '/^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/';
+                                                if(preg_match($ytpattern,$iod_video,$vid_id)){
+                                                    $vid_id = end($vid_id);
+                                                    $iod_video_thumbnail = 'http://img.youtube.com/vi/'.$vid_id.'/mqdefault.jpg';
+                                                }else{
+                                                    $iod_video_thumbnail = 'http://www.askgamblers.com/uploads/original/isoftbet-2-5474883270a0f81c4b8b456b.png';
+                                                }
+                                                // http://i3.ytimg.com/vi/$vid_id/maxresdefault.jpg
+                                                $iod_video_thumbnail = get_the_post_thumbnail_url($video,"full");
+                                ?>
                                 <div class="col-sm-6">
                                     <div class="embed-responsive embed-responsive-16by9" style="border-bottom: 5px solid #ce0505;">
                                         <a class="embed-responsive-item main-box lightbox" href="https://www.youtube.com/watch?v=<?=$vid_id?>" data-plugin-options='{"type":"iframe"}'>
                                             <span class="image-hover-icon image-hover-dark">
                                                 <i class="fa fa-play-circle"></i>
                                             </span>
-                                            <img src="http://i3.ytimg.com/vi/<?=$vid_id?>/maxresdefault.jpg" alt="..." class="img-responsive">
+                                            <img src="<?=$iod_video_thumbnail?>" alt="..." class="img-responsive">
                                         </a>
                                     </div>
                                 </div>
+                                <?php
+                                            }
+                                        }
+                                    }
+                                ?>
                             </div>
                                 </div>
 
