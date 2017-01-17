@@ -27,8 +27,20 @@ $children = get_children( $args );
                                 <li class="list-group-item">
                                     <a class="dropdown-toggle" href="#"><?=$category->post_title?></a>
                                     <ul>
-                                        <li>
+                                        <li class="active">
                                             <a href="<?=get_permalink($category->ID)?>/fighters">Fighters</a>
+                                            <ul class="fighter-category">
+                                            <?php
+                                                $fighter_categories = get_terms('fighters');
+                                                if(!empty($fighter_categories)){
+                                                    foreach ($fighter_categories as $_cat) {
+                                            ?>
+                                                <li><a href="<?=get_permalink($category->ID).'fighters/'.$_cat->slug?>"><?=$_cat->name?></a></li>
+                                            <?php
+                                                    }
+                                                }
+                                            ?>
+                                            </ul>
                                         </li>
                                         <li>
                                             <a href="<?=get_permalink($category->ID)?>/news">News</a>

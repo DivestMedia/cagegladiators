@@ -104,7 +104,11 @@ jQuery( function ( $ ) {
         var limit = 12;
         var old_page = 1;
         var cat = $('#section-organizations-fighters').data('cat');
-        var base_path = '/organizations/'+cat+'/fighters/';
+        var div = $('#section-organizations-fighters').data('div');
+        if(div.length)
+            var base_path = '/organizations/'+cat+'/fighters/'+div+'/';
+        else
+            var base_path = '/organizations/'+cat+'/fighters/';
         var cur_title = $(document).find("title").text();
         // window.history.pushState("", "Hey", base_path);
 

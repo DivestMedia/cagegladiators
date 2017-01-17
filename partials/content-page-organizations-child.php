@@ -34,7 +34,6 @@ $fighters = get_posts([
     'suppress_filters' => true
 ]);
 
-
 ?>
 <section class="alternate section-fighters section-organizations-child" id="section-organizations" data-cat="<?=$post->post_name?>">
     <div class="container">
@@ -53,8 +52,20 @@ $fighters = get_posts([
                                 <li class="list-group-item <?=!strcasecmp($category->ID, $post->ID)?'active cur_active':''?>">
                                     <a class="dropdown-toggle" href="<?=get_permalink($category->ID)?>"><?=$category->post_title?></a>
                                     <ul>
-                                        <li>
+                                        <li class="active">
                                             <a href="<?=get_permalink($category->ID)?>/fighters">Fighters</a>
+                                            <ul class="fighter-category">
+                                            <?php
+                                                $fighter_categories = get_terms('fighters');
+                                                if(!empty($fighter_categories)){
+                                                    foreach ($fighter_categories as $_cat) {
+                                            ?>
+                                                <li><a href="<?=get_permalink($category->ID).'fighters/'.$_cat->slug?>"><?=$_cat->name?></a></li>
+                                            <?php
+                                                    }
+                                                }
+                                            ?>
+                                            </ul>
                                         </li>
                                         <li>
                                             <a href="<?=get_permalink($category->ID)?>/news">News</a>

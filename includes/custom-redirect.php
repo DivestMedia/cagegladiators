@@ -47,6 +47,7 @@
 		  		$_org = get_query_var( '_org' );
 		  		$_type = get_query_var( '_type' );
 		  		$f_cat = get_query_var( 'f_cat' );
+		  		$c_paged = get_query_var( 'c_paged' );
 		  		if(!empty($_fn)){
 		  			$args = array(
 					  'name'        => $_fn,

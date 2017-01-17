@@ -18,6 +18,7 @@ $page = get_query_var('c_paged') ?: 1;
 $cat = !empty($f_cat)?$f_cat:'';
 
 
+
 // echo '<pre>';
 // var_dump($page);
 // print_r(get_terms(
@@ -28,7 +29,8 @@ $cat = !empty($f_cat)?$f_cat:'';
 // echo '</pre>';
 $is_infinite = false;
 
-if(ctype_alpha($page)){
+
+if(ctype_alpha(str_replace('_','',$page))){
     $page = strtolower($page);
     $fighters = get_posts([
         'posts_per_page'   => $_limit,
@@ -37,6 +39,7 @@ if(ctype_alpha($page)){
         'order'            => 'ASC',
         'post_type'        => 'fighter',
         'post_status'      => 'publish',
+        'tag'              => strtoupper($_org),
         'tax_query' => array(
             array(
                 'taxonomy' => 'fighters',
@@ -60,8 +63,9 @@ if(ctype_alpha($page)){
     $_rtotal = get_terms(
         array(
             'taxonomy' => 'fighters',
-            'name' => $page,
+            'slug' => $page,
         ));
+    $cat = $page;
     $_rtotal = !empty($_rtotal[0])?$_rtotal[0]:'';
     $base ='/organizations/'.$_org.'/fighters/'.$page.'/%_%';
     $page = 1;
@@ -74,6 +78,7 @@ if(ctype_alpha($page)){
         'order'            => 'ASC',
         'post_type'        => 'fighter',
         'post_status'      => 'publish',
+        'tag'              => strtoupper($_org),
         'tax_query' => array(
             array(
                 'taxonomy' => 'fighters',
@@ -97,11 +102,11 @@ if(ctype_alpha($page)){
      $_rtotal = get_terms(
         array(
             'taxonomy' => 'fighters',
-            'name' => $cat,
+            'slug' => $cat,
         ));
      $_rtotal = !empty($_rtotal[0])?$_rtotal[0]:'';
      $base ='/organizations/'.$_org.'/fighters/'.$cat.'/%_%';
-}else{
+}elseif(empty($cat)&&!ctype_alpha(str_replace('_','',$page))){
     $fighters = get_posts([
         'posts_per_page'   => $_limit,
         'paged'            => $page,
@@ -136,11 +141,9 @@ if(ctype_alpha($page)){
         $is_infinite = true;
 }
 
-
 get_header();
-
 ?>
-<section class="alternate section-fighters" id="section-organizations-fighters" data-cat="<?=$_org?>">
+<section class="alternate section-fighters" id="section-organizations-fighters" data-cat="<?=$_org?>" data-div="<?=$cat?>">
     <div class="container">
         <div class="row tab-v3">
             <div class="col-sm-3 col-md-2 hidden-xs">
@@ -154,15 +157,34 @@ get_header();
                         <ul class="list-group list-group-bordered list-group-noicon uppercase">
                             <?php foreach ($children as $category): 
                                 $active = [];
-                                if(!empty($_org==$category->post_name)){
-                                    $active[$_type] = 'cur_active';
+                                if(!empty($_org==$category->post_name)&&empty($cat)){
+                                    $active[$_type] = 'active cur_active';
+                                }else{
+                                    $active[$_type] = 'active';
                                 }
                             ?>
                                 <li class="list-group-item <?=!strcasecmp($category->post_title, $_org)?'active':''?>">
                                     <a class="dropdown-toggle" href="#"><?=$category->post_title?></a>
                                     <ul>
                                         <li class="<?=(!empty($active[$_type])&&!strcasecmp($_type, 'fighters'))?$active[$_type]:''?>">
-                                            <a href="<?=get_permalink($category->ID)?>/fighters">Fighters</a>
+                                            <a href="<?=get_permalink($category->ID)?>fighters">Fighters</a>
+                                            <ul class="fighter-category">
+                                            <?php
+                                                $fighter_categories = get_terms('fighters');
+                                                if(!empty($fighter_categories)){
+                                                    foreach ($fighter_categories as $_cat) {
+                                                        if(!empty($_org==$category->post_name)&&!empty($cat)&&!strcasecmp($cat, $_cat->slug)){
+                                                            $active[$_type] = 'active cur_active';
+                                                        }else{
+                                                            $active[$_type] = '';
+                                                        }
+                                            ?>
+                                                <li class="<?=(!empty($active[$_type])&&!strcasecmp($_type, 'fighters'))?$active[$_type]:''?>"><a href="<?=get_permalink($category->ID).'fighters/'.$_cat->slug?>"><?=$_cat->name?></a></li>
+                                            <?php
+                                                    }
+                                                }
+                                            ?>
+                                            </ul>
                                         </li>
                                         <li class="<?=(!empty($active[$_type])&&!strcasecmp($_type, 'news'))?$active[$_type]:''?>">
                                             <a href="<?=get_permalink($category->ID)?>/news">News</a>
@@ -179,7 +201,7 @@ get_header();
                 <header class="text-center margin-bottom-50 tiny-line">
                     <h2 class="font-proxima uppercase"><?=$_org?> Fighters</h2>
                 </header>
-                <div class="fighter_container <?=$is_infinite?'infinite-scroll-custom':''?>" data-nextselector="#inf-load-next-fighter" data-itemselector=".inline-page">
+                <div class="fighter_container <?=$is_infinite?'infinite-scroll-custom':''?>" <?=$is_infinite?'data-nextselector="#inf-load-next-fighter" data-itemselector=".inline-page"':''?>>
                 <?php
                     if(!empty($fighters)){
                         ?>
@@ -216,9 +238,12 @@ get_header();
 
                 <?php
                     }
+
                 ?>
                         
-                     <?php if(empty($fighters)){?>
+                     <?php if(empty($fighters)){
+                        $is_infinite = true;
+                        ?>
                         <div class="margin-bottom-30 text-center">
                              <h2 class="text-gray">No fighter available</h2>
                         </div>
