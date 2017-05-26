@@ -119,9 +119,9 @@ data-background="assets/images/boxed_background/1.jpg"
 							<i class="fa fa-search"></i>
 						</a>
 						<div class="search-box">
-							<form action="<?php echo site_url();?>" method="get">
+							<form action="<?php echo site_url();?>/search" method="get">
 								<div class="input-group">
-									<input type="text" name="s" id="s" placeholder="Search" class="form-control" />
+									<input type="text" name="keyword" id="s" placeholder="Search" class="form-control" />
 									<span class="input-group-btn">
 										<button class="btn btn-danger btn-red" type="submit">Search</button>
 									</span>

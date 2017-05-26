@@ -49,6 +49,38 @@
 		</figure>
 	</div>
 
+
+	<?php
+	$fatAss2BadAsses = get_posts([
+		'post_status' => 'publish',
+		'posts_per_page' => 1,
+		'posts_per_archive_page' => 1,
+		'orderby' => 'rand',
+		'category_name' => 'gladiators-talk'
+	]);
+	if(count($fatAss2BadAsses)):
+		foreach ($fatAss2BadAsses as $key => $fatAss2BadAss) :
+			$imagesrc = wp_get_attachment_image_src(get_post_thumbnail_id($fatAss2BadAss->ID),'full');
+			?>
+			<!-- POST ITEM -->
+				<div class="featured-side-article-item blog-post-item col-md-12 nopadding margin-bottom-20">
+				<!-- IMAGE -->
+				<figure>
+						<img class="img-responsive" src="<?=$imagesrc[0]?>" alt="">
+				</figure>
+				<p class="nomargin">
+					<?=trim_text($fatAss2BadAss->post_content,150)?>
+					<br>
+					<!-- <a href="<?=get_the_permalink($fatAss2BadAss->ID)?>" class="btn btn-red noradius uppercase margin-top-10" disabled> -->
+					<a href="#" class="btn btn-red noradius uppercase margin-top-10">
+						<span>Coming Soon</span>
+					</a>
+				</p>
+			</div>
+			<!-- /POST ITEM -->
+		<?php endforeach; ?>
+	<?php endif; ?>
+
 	<?php
 	$fatAss2BadAsses = get_posts([
 		'post_status' => 'publish',
@@ -62,7 +94,7 @@
 			$imagesrc = wp_get_attachment_image_src(get_post_thumbnail_id($fatAss2BadAss->ID),'full');
 			?>
 			<!-- POST ITEM -->
-			<div class="featured-side-article-item blog-post-item col-md-12 nopadding margin-bottom-20">
+				<div class="featured-side-article-item blog-post-item col-md-12 nopadding margin-bottom-20">
 				<!-- IMAGE -->
 				<figure>
 						<img class="img-responsive" src="<?=$imagesrc[0]?>" alt="">
