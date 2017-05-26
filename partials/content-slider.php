@@ -27,7 +27,7 @@
 ?>
 <!-- OWL SLIDER -->
 <section id="slider">
-<a id="YTPlayer" class="player" data-property="{videoURL:'https://www.youtube.com/watch?v=w8fGK7Ubfxk',containment:'#slider-vid-1',autoPlay:true, mute:true, startAt:0, stopAt:39, opacity:1, loop:1, showControls:false}"></a>
+<a id="YTPlayer" class="player" data-property="{videoURL:'https://www.youtube.com/watch?v=nBjKRUkSRGo',containment:'#slider-vid-1',autoPlay:true, mute:true, startAt:0, stopAt:39, opacity:1, loop:1, showControls:false}"></a>
     <div class="owl-carousel buttons-autohide controlls-over nomargin hidden-xs" data-plugin-options='{"singleItem": true, "items":"3", "autoPlay": true, "navigation": true, "pagination": true, "transitionStyle":"fade"}'>
     	<?php
     		if(!empty($_banners)){
@@ -42,7 +42,7 @@
     		}
 		?>
         <div id="slider-vid-1" style="height: 573px;">
-        	
+
         </div>
     </div>
     <div class="owl-carousel buttons-autohide controlls-over nomargin visible-xs" data-plugin-options='{"singleItem": true, "items":"3", "autoPlay": true, "navigation": true, "pagination": true, "transitionStyle":"fade"}'>
@@ -62,11 +62,10 @@
             <div>
                 <a class="embed-responsive-item main-box lightbox cc-watch-now-container" href="https://www.youtube.com/watch?v=<?=$vid_id[1]?>" data-plugin-options='{"type":"iframe"}'><img class="img-responsive" src="<?=$iod_video_thumbnail?>" width="100%" alt=""></a>
             </div>
-        <?php        
+        <?php
             }
         ?>
-        
+
     </div>
 </section>
 <!-- /OWL SLIDER -->
-
