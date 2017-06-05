@@ -3,7 +3,7 @@
 	<div class="ff-bg-red"></div>
 	<div class="ff-bg-gray">
 		<div class="container padding-bottom-0">
-			<div class="owl-carousel owl-padding-10 buttons-autohide controlls-over" data-plugin-options='{"singleItem": true, "items":"2", "autoPlay": false, "navigation": false, "pagination": false, "stopOnHover": true }' id="global-news-post-slider">
+			<div class="owl-carousel owl-padding-10 buttons-autohide controlls-over" data-plugin-options='{"singleItem": true, "items":"2", "autoPlay": true, "navigation": false, "pagination": false, "stopOnHover": true }' id="global-news-post-slider">
 				<div class="figher-item">
 					<img src="<?=site_url('/wp-content/uploads/2016/11/main-featured-fighter-2.png')?>" class="img-responsive"/>
 						<div class="fighter-profile">
