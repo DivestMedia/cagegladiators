@@ -23,7 +23,6 @@
 
 					</div>
 					<div class="col-md-8 col-sm-6 hidden-xs">
-						<!-- <img src="/wp-content/themes/cagegladiators/assets/img/oldskoollogo.png" /> -->
 					</div>
 				</div>
 			</div>
