@@ -1,6 +1,7 @@
 <section class="section-fighters mod-section-fighters">
     <?php
     $featured_fighter_month = get_posts([
+        's'                => 'Fighter Profile',
         'posts_per_page'   => 8,
         'orderby'          => 'rand',
         'post_type'        => 'iod_video',
@@ -9,7 +10,7 @@
             array(
                 'taxonomy' => 'iod_category',
                 'field' => 'name',
-                'terms' => 'Featured Gym',
+                'terms' => 'Profile Videos',
             )
         ),
         'suppress_filters' => true
@@ -20,7 +21,7 @@
         <div class="featured-figter-container-month">
             <div class="container">
                 <header class="text-center margin-bottom-30">
-                    <h2 class="section-title"><strong class="text-black">Featured  <span>Training</span> Gym</strong></h2>
+                    <h2 class="section-title"><strong class="text-black">Fighter  <span>Profiles</span></strong></h2>
                 </header>
                 <div class="row margin-bottom-20 ">
                     <?php
@@ -53,7 +54,7 @@
                         }
                         ?>
 
-                        <div class="col-md-6 col-sm-6 col-xs-12 margin-top-20">
+                        <div class="col-md-4 col-sm-6 col-xs-12 margin-top-20">
                             <div class="col-md-12 margin-bottom-10">
                                 <a class="embed-responsive-item main-box lightbox cc-watch-now-container" href="https://www.youtube.com/watch?v=<?=$vid_id?>" data-plugin-options='{"type":"iframe"}'>
                                     <span class="image-hover-icon image-hover-dark">

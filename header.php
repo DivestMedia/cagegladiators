@@ -18,7 +18,7 @@ flush();
 
 	<? wp_head();?>
 	<link rel="stylesheet" href="<?=get_stylesheet_directory_uri();?>/assets/js/master-slider/masterslider/style/masterslider.css">
-	<link rel='stylesheet' id='main-css' href='<?=get_stylesheet_directory_uri();?>/assets/css/general.css' type='text/css' media='all' />
+	<link rel='stylesheet' id='main-css' href='<?=get_stylesheet_directory_uri();?>/assets/css/general.css?<?=date('Ymd')?>' type='text/css' media='all' />
 
 	<link rel="apple-touch-icon" sizes="57x57" href="<?=get_stylesheet_directory_uri();?>/assets/favicon/apple-icon-57x57.png">
 	<link rel="apple-touch-icon" sizes="60x60" href="<?=get_stylesheet_directory_uri();?>/assets/favicon/apple-icon-60x60.png">

@@ -46,7 +46,15 @@
                     </ul>
                 <?php endif; ?>
                 <!-- article content -->
-                <?php the_content();?>
+                <figure>
+                    <?php the_post_thumbnail('mid-image',[
+                        'class' => 'img-responsive margin-bottom-30'
+                    ])
+                    ?>
+                </figure>
+                <div class="post-content <?=!strcasecmp(get_cat_name($_parentcat),'Articles')?'isarticle':''?>">
+                    <?=wpautop($post->post_content)?>
+                </div>
                 <!-- /article content -->
                 <?php if(in_category(['news'])):?>
                     <div class="row">

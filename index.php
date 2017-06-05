@@ -10,7 +10,6 @@ get_template_part( 'partials/content', 'main-featuredfighter' );
 		get_template_part( 'partials/content', 'featured-gym' );
 		get_template_part( 'partials/content', 'cage-grid' );
 		?>
-
 	</div>
 </section>
 <?php

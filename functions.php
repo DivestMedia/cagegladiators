@@ -503,7 +503,7 @@ function rc_add_cpts_to_search($query) {
 				$searchable_types[] = $type->name;
 			}
 		}
-            
+
 
 		$query->set( 'post_type', $searchable_types );
 	}
@@ -512,4 +512,33 @@ function rc_add_cpts_to_search($query) {
 
 add_action( 'pre_get_posts', 'rc_add_cpts_to_search' );
 
+function time_elapsed_string($datetime, $full = false) {
+    $now = new DateTime;
+    $ago = DateTime::createFromFormat('Y-m-d H:i:s', $datetime);
+
+    $diff = $now->diff($ago);
+
+    $diff->w = floor($diff->d / 7);
+    $diff->d -= $diff->w * 7;
+
+    $string = array(
+        'y' => 'year',
+        'm' => 'month',
+        'w' => 'week',
+        'd' => 'day',
+        'h' => 'hour',
+        'i' => 'minute',
+        's' => 'second',
+    );
+    foreach ($string as $k => &$v) {
+        if ($diff->$k) {
+            $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
+        } else {
+            unset($string[$k]);
+        }
+    }
+
+    if (!$full) $string = array_slice($string, 0, 1);
+    return $string ? implode(', ', $string) . ' ago' : 'just now';
+}
 ?>

@@ -9,7 +9,7 @@
             array(
                 'taxonomy' => 'iod_category',
                 'field' => 'name',
-                'terms' => 'Featured Gym',
+                'terms' => 'Events',
             )
         ),
         'suppress_filters' => true
@@ -20,7 +20,7 @@
         <div class="featured-figter-container-month">
             <div class="container">
                 <header class="text-center margin-bottom-30">
-                    <h2 class="section-title"><strong class="text-black">Featured  <span>Training</span> Gym</strong></h2>
+                    <h2 class="section-title"><strong class="text-black">Events in <span>Asia</span></strong></h2>
                 </header>
                 <div class="row margin-bottom-20 ">
                     <?php
@@ -35,25 +35,9 @@
                             $iod_video_thumbnail = 'http://www.askgamblers.com/uploads/original/isoftbet-2-5474883270a0f81c4b8b456b.png';
                         };
 
-                        $fighter_id = get_post_meta($video->ID,'fighter_id',true);
-                        $c_fighter = get_post($fighter_id);
-                        $association = get_post_meta( $fighter_id, '_uf_association', true );
-                        $_uf_wintko = get_post_meta( $fighter_id, '_uf_wintko', true );
-                        $_uf_winsubmissions = get_post_meta( $fighter_id, '_uf_winsubmissions', true );
-                        $_uf_windecisions = get_post_meta( $fighter_id, '_uf_windecisions', true );
-                        $_r_win = get_post_meta( $fighter_id, '_uf_win', true );
-                        $_r_loss = get_post_meta( $fighter_id, '_uf_loss', true );
-                        $_r_draw = get_post_meta( $fighter_id, '_uf_draw', true );
-                        $record = $_r_win.' - '.$_r_loss.' - '.$_r_draw;
-                        $_r_fighter_terms = get_the_terms($fighter_id,'fighters');
-                        $f_weight_class_slug = '';
-                        if(!empty($_r_fighter_terms[0])){
-                            $f_weight_class = $_r_fighter_terms[0]->name;
-                            $f_weight_class_slug = $_r_fighter_terms[0]->slug;
-                        }
                         ?>
 
-                        <div class="col-md-6 col-sm-6 col-xs-12 margin-top-20">
+                        <div class="col-md-4 col-sm-6 col-xs-12 margin-top-20">
                             <div class="col-md-12 margin-bottom-10">
                                 <a class="embed-responsive-item main-box lightbox cc-watch-now-container" href="https://www.youtube.com/watch?v=<?=$vid_id?>" data-plugin-options='{"type":"iframe"}'>
                                     <span class="image-hover-icon image-hover-dark">
