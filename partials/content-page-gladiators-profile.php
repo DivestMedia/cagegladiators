@@ -16,7 +16,7 @@
                 <div class="col-sm-6">
                     <figure>
                         <a href="#">
-                            <img src="<?=get_stylesheet_directory_uri()?>/assets/img/team_fighters.jpg" class="img-responsive">
+                            <img src="<?=get_stylesheet_directory_uri()?>/assets/img/team_profile.jpg" class="img-responsive">
                         </a>
                     </figure>
                 </div>

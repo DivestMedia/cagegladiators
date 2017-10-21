@@ -2,16 +2,9 @@
     <?php
     $featured_fighter_month = get_posts([
         'posts_per_page'   => 8,
-        'orderby'          => 'date',
+        'orderby'          => 'rand',
         'post_type'        => 'iod_video',
         'post_status'      => 'publish',
-        'tax_query' => array(
-            array(
-                'taxonomy' => 'iod_category',
-                'field' => 'name',
-                'terms' => 'Events',
-            )
-        ),
         'suppress_filters' => true
     ]);
     if(!empty($featured_fighter_month)){
@@ -20,7 +13,7 @@
         <div class="featured-figter-container-month">
             <div class="container">
                 <header class="text-center margin-bottom-30">
-                    <h2 class="section-title"><strong class="text-black">Events in <span>Asia</span></strong></h2>
+                    <h2 class="section-title"><strong class="text-black">Cage Gladiator <span>Videos</span></strong></h2>
                 </header>
                 <div class="row margin-bottom-20 ">
                     <?php
@@ -47,7 +40,7 @@
                                 </a>
                             </div>
                             <div class="col-md-12 col-sm-12 fighter-details">
-                                <div class="col-xs-12"><a href="#"><h4 class="margin-bottom-0 text-black"><?=$ffm->post_title?></h4></a></div>
+                                <div class="col-xs-12"><a href="<?=get_the_permalink($video->ID)?>"><h4 class="margin-bottom-0 text-black"><?=trim_text($ffm->post_title,50)?></h4></a></div>
                             </div>
 
                         </div>
@@ -63,6 +56,7 @@
         </div>
         <div class="container">
             <div class="divider double-line"><!-- divider --></div>
+            <div class="pagination block"><?=posts_pagination(12)?></div>
         </div>
         <?php
     }

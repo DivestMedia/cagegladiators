@@ -4,10 +4,10 @@
 		<section id="sec-footer">
 		<!-- FOOTER -->
 		<footer id="footer">
-			<div class="container padding-20 margin-bottom-0">
+			<div class="container padding-20 margin-bottom-0" style="background:#000!important;">
 				<div class="text-center">
 					<a href="<?=site_url()?>" class="text-white underline">
-						<img src="<?=get_stylesheet_directory_uri();?>/assets/img/footer-logo.png" class="width-150">
+						<img src="<?=get_stylesheet_directory_uri();?>/assets/img/footer-logo-rev2.png" class="width-200">
 					</a>
 					<!-- Social Icons -->
 					<div class="text-center margin-top-0">

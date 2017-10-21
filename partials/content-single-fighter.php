@@ -307,7 +307,7 @@ if(!empty($fighter_videos)){
                                                         $ishidden = true;
                                                     }
                                                     ?>
-                                                    <a class="image-hover media-item <?=$ishidden===true?'hidden':''?>" href="<?=wp_get_attachment_image_src($img,'medium')[0]?>" >
+                                                    <a class="image-hover media-item <?=$ishidden===true?'hidden':''?>" href="<?=wp_get_attachment_image_src($img,'full')[0]?>" >
                                                         <img src="<?=wp_get_attachment_image_src($img,'medium')[0]?>" alt="...">
                                                     </a>
                                                     <?php

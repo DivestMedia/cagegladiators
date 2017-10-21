@@ -9,81 +9,40 @@
                 <?php
                 global $wp_query, $query_string;
                 while ( have_posts() ) : the_post();
-                ?>
-                <?php if(in_category(['news'])):?>
-                    <h1 class="blog-post-title"><? the_title();?></h1>
-                <?php else: ?>
-                    <div class="heading-title heading-line-double">
-                        <h1 class="blog-post-title"><? the_title();?></h1>
-                    </div>
-                <?php endif; ?>
-                <?php if(in_category(['news'])):?>
-                    <ul class="blog-post-info list-inline">
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-clock-o"></i>
-                                <span class="font-lato"><time class="entry-date" datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>"><?php echo esc_html( get_the_date() ); ?></time></span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?=get_comments_link()?>">
-                                <i class="fa fa-comment-o"></i>
-                                <span class="font-lato"><?=(comments_number( 'No Comments yet', 'One Comment', '% Comments' ))?></span>
-                            </a>
-                        </li>
-                        <?php
-                        $categories = get_the_category_list(',');
-                        if(!empty($categores)){
-                            ?>
-                            <li>
-                                <i class="fa fa-folder-open-o"></i>
-                                <?=$categories?>
-                            </li>
-                            <?php
-                        }
-                        ?>
 
-                    </ul>
-                <?php endif; ?>
+                $iod_video = json_decode(get_post_meta( get_the_ID(), '_iod_video',true))->embed->url;
+                $ytpattern = '/^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/';
+                if(preg_match($ytpattern,$iod_video,$vid_id)){
+                    $vid_id = end($vid_id);
+                    $iod_video_thumbnail = 'http://img.youtube.com/vi/'.$vid_id.'/maxresdefault.jpg';
+                }else{
+                    $iod_video_thumbnail = 'http://www.askgamblers.com/uploads/original/isoftbet-2-5474883270a0f81c4b8b456b.png';
+                };
+                ?>
+                <header class="text-left margin-bottom-30">
+                    <h2 class="section-title"><strong class="text-black"><?=get_the_title()?></strong></h2>
+                </header>
                 <!-- article content -->
                 <figure>
-                    <?php the_post_thumbnail('main-image',[
-                        'class' => 'img-responsive margin-bottom-30'
-                    ])
-                    ?>
+                    <div class="embed-responsive embed-responsive-16by9" style="border-bottom: 5px solid #ce0505;">
+                        <a class="embed-responsive-item main-box lightbox" href="https://www.youtube.com/watch?v=<?=$vid_id?>" data-plugin-options='{"type":"iframe"}'>
+                            <img src="<?=$iod_video_thumbnail?>" alt="..." class="img-responsive">
+                            <span class="image-hover-icon image-hover-dark" style="opacity:1!important;">
+                                <i class="fa fa-play-circle"></i>
+                            </span>
+                        </a>
+                    </div>
                 </figure>
                 <div class="post-content <?=!strcasecmp(get_cat_name($_parentcat),'Articles')?'isarticle':''?>">
                     <?=wpautop($post->post_content)?>
                 </div>
-                <!-- /article content -->
-                <?php if(in_category(['news'])):?>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <a class="btn btn-3d btn-reveal btn-black pull-right" href="<?=site_url('category/news')?>">
-                                <i class="fa fa-newspaper-o"></i>
-                                <span>Go Back to All News</span>
-                            </a>
-                        </div>
-                    </div>
-                <?php endif; ?>
+
 
                 <div class="divider divider-dotted"><!-- divider --></div>
 
             <?php endwhile; // end of the loop. ?>
             <?php wp_reset_query(); ?>
-            <!-- TAGS -->
-            <?php
-            $terms = get_terms('post_tag',array('hide_empty'=>false));
-            foreach($terms as $t) {
-                ?>
-                <a class="tag" href="#">
-                    <span class="txt"><?=$t->name?></span>
-                    <span class="num"><?=$t->count?></span>
-                </a>
-                <?php
-            }
-            ?>
-            <!-- /TAGS -->
+
 
             <!-- SHARE POST -->
             <div class="clearfix margin-top-30">

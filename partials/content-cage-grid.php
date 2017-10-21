@@ -10,7 +10,7 @@
         <div class="col-md-6">
             <div class="content-side-featuredfighter col-md-12 col-sm-6" style="padding: 0;">
                 <figure>
-                    <a href="#"><img class="img-responsive" src="<?=get_stylesheet_directory_uri()?>/assets/img/gladiators_talk.jpg" alt=""></a>
+                    <a href="<?=site_url('gladiators-talk')?>"><img class="img-responsive" src="<?=get_stylesheet_directory_uri()?>/assets/img/gladiators_talk.jpg" alt=""></a>
                 </figure>
             </div>
         </div>
@@ -25,6 +25,20 @@
             <div class="content-side-featuredfighter col-md-12 col-sm-6" style="padding: 0;">
                 <figure>
                     <a href="#"><img class="img-responsive" src="<?=get_stylesheet_directory_uri()?>/assets/img/organizations.jpg" alt=""></a>
+                </figure>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="content-side-featuredfighter col-md-12 col-sm-6" style="padding: 0;">
+                <figure>
+                    <a href="<?=site_url('one-championship')?>"><img class="img-responsive" src="<?=get_stylesheet_directory_uri()?>/assets/img/one.jpg" alt=""></a>
+                </figure>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="content-side-featuredfighter col-md-12 col-sm-6" style="padding: 0;">
+                <figure>
+                    <a href="#"><img class="img-responsive" src="<?=get_stylesheet_directory_uri()?>/assets/img/ugb.jpg" alt=""></a>
                 </figure>
             </div>
         </div>

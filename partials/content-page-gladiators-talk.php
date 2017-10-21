@@ -2,14 +2,14 @@
     <?php
     $featured_fighter_month = get_posts([
         'posts_per_page'   => 8,
-        'orderby'          => 'date',
+        'orderby'          => 'rand',
         'post_type'        => 'iod_video',
         'post_status'      => 'publish',
         'tax_query' => array(
             array(
                 'taxonomy' => 'iod_category',
                 'field' => 'name',
-                'terms' => 'Events',
+                'terms' => 'Gladiators Talk',
             )
         ),
         'suppress_filters' => true
@@ -20,7 +20,7 @@
         <div class="featured-figter-container-month">
             <div class="container">
                 <header class="text-center margin-bottom-30">
-                    <h2 class="section-title"><strong class="text-black">Events in <span>Asia</span></strong></h2>
+                    <h2 class="section-title"><strong class="text-black">Gladiators <span>Talk</span></strong></h2>
                 </header>
                 <div class="row margin-bottom-20 ">
                     <?php
@@ -30,9 +30,9 @@
                         $ytpattern = '/^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/';
                         if(preg_match($ytpattern,$iod_video,$vid_id)){
                             $vid_id = end($vid_id);
-                            $iod_video_thumbnail = 'http://img.youtube.com/vi/'.$vid_id.'/mqdefault.jpg';
+                            $iod_video_thumbnail = 'http://img.youtube.com/vi/'.$vid_id.'/maxresdefault.jpg';
                         }else{
-                            $iod_video_thumbnail = 'http://www.askgamblers.com/uploads/original/isoftbet-2-5474883270a0f81c4b8b456b.png';
+                            $iod_video_thumbnail = get_stylesheet_directory_uri() . '/assets/img/sample-news-4.png';
                         };
 
                         ?>
@@ -47,7 +47,7 @@
                                 </a>
                             </div>
                             <div class="col-md-12 col-sm-12 fighter-details">
-                                <div class="col-xs-12"><a href="#"><h4 class="margin-bottom-0 text-black"><?=$ffm->post_title?></h4></a></div>
+                                <div class="col-xs-12"><a href="<?=get_the_permalink($ffm->ID)?>"><h4 class="margin-bottom-0 text-black"><?=$ffm->post_title?></h4></a></div>
                             </div>
 
                         </div>
