@@ -1,7 +1,7 @@
 <section class="section-fighters mod-section-fighters">
     <?php
     $featured_fighter_month = get_posts([
-        'posts_per_page'   => 8,
+        'posts_per_page'   => -1,
         'orderby'          => 'rand',
         'post_type'        => 'iod_video',
         'post_status'      => 'publish',
